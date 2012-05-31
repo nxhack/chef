@@ -19,7 +19,7 @@
   },
   "recipes": {
     "ec2-hostname": "Set hostname and FQDN of the node.",
-    "ec2-hostname::ec2_set_hosts": "Set init script modify hosts file"
+    "ec2-hostname::ec2_set_hosts": "Set init script - modify hosts file at boot time."
   },
   "groupings": {
   },

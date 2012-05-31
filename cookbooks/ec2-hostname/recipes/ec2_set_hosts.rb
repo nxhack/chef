@@ -37,9 +37,9 @@ if node[:cloud][:provider] == 'ec2'
 
     cookbook_file "/usr/local/etc/init/ec2-set-hosts" do
       source "ec2-set-hosts"
-      mode 0755
       owner "root"
       group "root"
+      mode "0755"
     end
 
     directory "/usr/local/etc/bind/templates" do
@@ -52,9 +52,9 @@ if node[:cloud][:provider] == 'ec2'
 
     cookbook_file "/usr/local/etc/bind/templates/hosts.tmpl" do
       source "hosts.tmpl"
-      mode 0644
       owner "root"
       group "root"
+      mode "0644"
     end
 
     link "/etc/rc2.d/S12ec2-set-hosts" do

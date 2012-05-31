@@ -46,7 +46,7 @@ if node[:cloud][:provider] == 'ec2'
           source "hosts.erb"
           owner "root"
           group "root"
-          mode 0644
+          mode "0644"
           variables({
             :ipaddress => node[:ipaddress],
             :fqdn => fqdn,
@@ -64,7 +64,7 @@ if node[:cloud][:provider] == 'ec2'
           source "hosts.erb"
           owner "root"
           group "root"
-          mode 0644
+          mode "0644"
           variables({
             :ipaddress => node[:ipaddress],
             :fqdn => fqdn,
