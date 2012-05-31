@@ -1,4 +1,4 @@
-# Opscode chef files
+# Opscode chef : My Recipes
 
 ## bootstrap
 
