@@ -68,5 +68,12 @@ if node[:cloud][:provider] == 'ec2'
       })
     end
 
+    cookbook_file "/etc/default/bind9" do
+      source "bind9"
+      owner "root"
+      group "root"
+      mode "0644"
+    end
+
   end
 end
