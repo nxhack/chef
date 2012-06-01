@@ -1,0 +1,9 @@
+zone "$fqdn" {
+	type master;
+	file "/etc/bind/db.myzone";
+};
+
+zone "$arpa" {
+	type master;
+	file "/etc/bind/db.myarpa";
+};
