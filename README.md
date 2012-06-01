@@ -19,7 +19,7 @@ recipe           "ec2-hostname::ec2_set_hosts", "Set init script - modify hosts 
 <pre>
 recipe           "ec2-split-dns", "Install bind9 and Setup dns zone files for Split DNS." 
 recipe           "ec2-split-dns::ec2_set_dns_zone", "Install init script - modify dns zone files at boot time." 
-recipe           "ec2-split-dns::ec2_set_resolver", "Setup dns resolver related files. : /etc/resolv.conf /etc/dhcp3/dhclient.conf
+recipe           "ec2-split-dns::ec2_set_resolver", "Setup dns resolver related files. : /etc/resolv.conf /etc/dhcp3/dhclient.conf"
 </pre>
 
 * conf-tcpwrapper
