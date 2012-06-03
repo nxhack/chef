@@ -1,0 +1,29 @@
+defutf8 on
+defkanji utf-8
+encoding utf-8 utf-8
+defencoding utf-8
+#
+vbell off
+autodetach on
+startup_message off
+altscreen on
+# for Emacsian
+escape  ^Tt
+#
+defhstatus "^En:^Et"
+hardstatus on
+hardstatus alwayslastline "screen |%c %m/%d | %w"
+# for Macintosh delete key
+bindkey -k kD stuff \177
+# for MacOSX Terminal.app
+termcapinfo xterm* ti@:te@
+# avoid angerous key bind
+bind x
+bind ^x
+bind k
+bind ^k
+bind .
+bind ^\
+bind \\
+bind ^h
+bind h

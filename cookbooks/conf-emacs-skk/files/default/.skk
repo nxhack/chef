@@ -1,0 +1,16 @@
+(setq skk-large-jisyo "/usr/share/skk/SKK-JISYO.L")
+(setq skk-rom-kana-rule-list
+      '(("!"  nil ("!" . "!"))
+        (";"  nil (";" . ";"))
+        (":"  nil (":" . ":"))
+        ("?"  nil ("?" . "?"))
+        ("@"  nil ("@" . "@"))))
+(setq skk-number-style 0) ;1996年7月21日(日)とかなる
+(setq skk-egg-like-newline t)
+(setq skk-auto-okuri-process t)
+(setq skk-delete-okuri-when-quit t)
+;(setq skk-auto-insert-paren t) ;()や[]の対応をとる
+;(setq skk-japanese-message-and-error t) ;error message を日本語で出力
+;(add-hook 'skk-mode-hook
+;      (function (lambda ()
+;              (local-unset-key "@"))))
