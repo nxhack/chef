@@ -22,7 +22,37 @@ recipe           "ec2-split-dns::ec2_set_dns_zone", "Install init script - modif
 recipe           "ec2-split-dns::ec2_set_resolver", "Setup dns resolver related files. : /etc/resolv.conf /etc/dhcp3/dhclient.conf"
 </pre>
 
+* ec2-lucid-backports
+<pre>
+recipe           "ec2-lucid-backports", "Configure ec2 lucid backports repository"
+</pre>
+
+* conf-bashrc
+<pre>
+recipe           "conf-bashrc", "Configure bashrc : Setup for ubuntu account."
+</pre>
+
+* conf-emacs-skk
+<pre>
+recipe           "conf-emacs-skk", "Configure emacs & skk : Setup for ubuntu account."
+</pre>
+
+* conf-screen
+<pre>
+recipe           "conf-screen", "Configure screen : Setup for ubuntu account."
+</pre>
+
+* conf-sysctl
+<pre>
+recipe           "conf-sysctl", "Configure sysctl"
+</pre>
+
 * conf-tcpwrapper
 <pre>
 recipe           "conf-tcpwrapper", "Configure TCP Wrapper : Setup /etc/hosts.allow file."
+</pre>
+
+* conf-tmux
+<pre>
+recipe           "conf-tmux", "Configure tmux : Setup for ubuntu account."
 </pre>
