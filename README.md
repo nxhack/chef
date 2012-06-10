@@ -12,7 +12,7 @@ Setup chef client using apt from opscode repository.
 * ec2-hostname
 <pre>
 recipe           "ec2-hostname", "Set hostname and FQDN of the node."
-recipe           "ec2-hostname::ec2_set_hosts", "Set init script - modify hosts file at boot time."
+recipe           "ec2-hostname::ec2_set_hosts", "Install init script - modify hosts file at boot time."
 </pre>
 
 * ec2-split-dns
