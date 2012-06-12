@@ -27,6 +27,11 @@ recipe           "ec2-split-dns::ec2_set_resolver", "Setup dns resolver related 
 recipe           "ec2-lucid-backports", "Configure ec2 lucid backports repository"
 </pre>
 
+* ec2-grub-menu-lst
+<pre>
+recipe           "ec2-grub-menu-lst", "Configures grub : setup kernel options"
+</pre>
+
 * conf-bashrc
 <pre>
 recipe           "conf-bashrc", "Configure bashrc : Setup for ubuntu account."

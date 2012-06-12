@@ -32,10 +32,10 @@ if node[:cloud][:provider] == 'ec2'
       owner "root"
       group "root"
       mode "0644"
-      notifies :restart, "service[ssh]"
+      notifies :restart, "service[bind9]"
     end
 
-    service "ssh"
+    service "bind9"
 
   end
 end
