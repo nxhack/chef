@@ -29,6 +29,13 @@ if node[:cloud][:provider] == 'ec2'
       action [ :enable, :start ]
     end
 
+    cookbook_file "/etc/default/bind9" do
+      source "bind9"
+      owner "root"
+      group "root"
+      mode "0644"
+    end
+
     template "/etc/bind/named.conf.options" do
       source "named.conf.options.erb"
       owner "root"
@@ -66,13 +73,7 @@ if node[:cloud][:provider] == 'ec2'
       variables({
         :arpa => arpa
       })
-    end
-
-    cookbook_file "/etc/default/bind9" do
-      source "bind9"
-      owner "root"
-      group "root"
-      mode "0644"
+      notifies :restart, "service[bind9]"
     end
 
   end
