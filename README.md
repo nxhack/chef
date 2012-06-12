@@ -52,6 +52,11 @@ recipe           "conf-screen", "Configure screen : Setup for ubuntu account."
 recipe           "conf-sysctl", "Configure sysctl"
 </pre>
 
+* conf-limits
+<pre>
+recipe           "conf-limits", "Install my limits"
+</pre>
+
 * conf-tcpwrapper
 <pre>
 recipe           "conf-tcpwrapper", "Configure TCP Wrapper : Setup /etc/hosts.allow file."
