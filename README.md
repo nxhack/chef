@@ -32,6 +32,11 @@ recipe           "ec2-lucid-backports", "Configure ec2 lucid backports repositor
 recipe           "ec2-grub-menu-lst", "Configures grub : setup kernel options"
 </pre>
 
+* [ec2-disable-TOE](https://github.com/nxhack/chef/tree/master/cookbooks/ec2-disable-TOE)
+<pre>
+recipe           "ec2-disable-TOE", "Configures disable TOE"
+</pre>
+
 * [conf-bashrc](https://github.com/nxhack/chef/tree/master/cookbooks/conf-bashrc)
 <pre>
 recipe           "conf-bashrc", "Configure bashrc : Setup for ubuntu account."

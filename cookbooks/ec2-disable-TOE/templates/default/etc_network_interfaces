@@ -1,0 +1,1 @@
+<%= node[:network_interfaces_flg] %>
