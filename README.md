@@ -37,9 +37,19 @@ recipe           "ec2-grub-menu-lst", "Configures grub : setup kernel options"
 recipe           "ec2-disable-TOE", "Configures disable TOE"
 </pre>
 
+* [conf-unattended-upgrades](https://github.com/nxhack/chef/tree/master/cookbooks/conf-unattended-upgrades)
+<pre>
+recipe           "conf-unattended-upgrades", "Configure unattended-upgrades"
+</pre>
+
 * [conf-bashrc](https://github.com/nxhack/chef/tree/master/cookbooks/conf-bashrc)
 <pre>
 recipe           "conf-bashrc", "Configure bashrc : Setup for ubuntu account."
+</pre>
+
+* [conf-ssh-config](https://github.com/nxhack/chef/tree/master/cookbooks/conf-ssh-config)
+<pre>
+recipe           "conf-ssh-config", "Configure ssh config : Setup for ubuntu account."
 </pre>
 
 * [conf-emacs-skk](https://github.com/nxhack/chef/tree/master/cookbooks/conf-emacs-skk)
