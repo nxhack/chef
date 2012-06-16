@@ -20,6 +20,7 @@
 if node[:cloud][:provider] == 'ec2'
   if node[:platform] == "ubuntu"
 
+    package "emacs23-nox"
     package "ddskk"
     package "skkdic"
 
