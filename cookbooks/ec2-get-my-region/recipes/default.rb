@@ -20,10 +20,11 @@
 if node[:cloud][:provider] == 'ec2'
   if node[:platform] == "ubuntu"
 
+    ec2_region=`curl -s http://169.254.169.254/latest/dynamic/instance-identity/document|grep region|awk -F\\" '{print $4}'`.chomp
+
     ruby_block "get_my_region" do
       block do
-        ec2_region=`curl -s http://169.254.169.254/latest/dynamic/instance-identity/document|grep region|awk -F\\" '{print $4}'`
-        node.set[:ec2_region]=ec2_region.chomp
+        node.set[:ec2_region]=ec2_region
         node.save
       end
       action :nothing
@@ -34,6 +35,9 @@ if node[:cloud][:provider] == 'ec2'
       owner "root"
       group "root"
       mode "0644"
+      variables({
+        :ec2_region => ec2_region
+      })
       notifies :create, "ruby_block[get_my_region]", :immediately
     end
 
