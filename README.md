@@ -47,6 +47,16 @@ recipe           "ec2-disable-TOE", "Configures disable TOE"
 recipe           "conf-unattended-upgrades", "Configure unattended-upgrades"
 </pre>
 
+* [conf-postfix](https://github.com/nxhack/chef/tree/master/cookbooks/conf-postfix)
+<pre>
+recipe           "conf-postfix", "Installs/Configure postfix"
+</pre>
+
+* [conf-cron-apt](https://github.com/nxhack/chef/tree/master/cookbooks/conf-cron-apt)
+<pre>
+recipe           "conf-cron-apt", "Configure cron-apt"
+</pre>
+
 * [conf-bashrc](https://github.com/nxhack/chef/tree/master/cookbooks/conf-bashrc)
 <pre>
 recipe           "conf-bashrc", "Configure bashrc : Setup for ubuntu account."

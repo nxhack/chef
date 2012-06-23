@@ -1,0 +1,2 @@
+autoclean -y
+full-upgrade -d -y -o APT::Get::Show-Upgraded=true
