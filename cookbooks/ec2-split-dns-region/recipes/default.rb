@@ -33,81 +33,80 @@ if node[:cloud][:provider] == 'ec2'
       Chef::Log.warn("This recipe uses search. Chef Solo does not support search.")
     else
       my_servers = search(:node,"ec2_region:us-east-1")
-    end
 
-    my_servers.each do |server|
-      if server[:fqdn] != node[:fqdn] 
-        server[:ec2_arpa] = IPAddr.new(server[:ipaddress]).reverse
+      my_servers.each do |server|
+        if server[:fqdn] != node[:fqdn] 
+          server[:ec2_arpa] = IPAddr.new(server[:ipaddress]).reverse
 
-        template "/etc/bind/db.#{server[:fqdn]}.arpa" do
-          source "db.otherarpa.erb"
-          owner "root"
-          group "root"
-          mode "0644"
-          variables({
-            :fqdn => server[:fqdn]
-          })
+          template "/etc/bind/db.#{server[:fqdn]}.arpa" do
+            source "db.otherarpa.erb"
+            owner "root"
+            group "root"
+            mode "0644"
+            variables({
+              :fqdn => server[:fqdn]
+            })
+          end
+
+          template "/etc/bind/db.#{server[:fqdn]}.zone" do
+            source "db.otherzone.erb"
+            owner "root"
+            group "root"
+            mode "0644"
+            variables({
+              :ipaddress => server[:ipaddress]
+            })
+          end
         end
-
-        template "/etc/bind/db.#{server[:fqdn]}.zone" do
-          source "db.otherzone.erb"
-          owner "root"
-          group "root"
-          mode "0644"
-          variables({
-            :ipaddress => server[:ipaddress]
-          })
-        end
-
       end
-    end
 
-    cookbook_file "/etc/default/bind9" do
-      source "bind9"
-      owner "root"
-      group "root"
-      mode "0644"
-    end
+      cookbook_file "/etc/default/bind9" do
+        source "bind9"
+        owner "root"
+        group "root"
+        mode "0644"
+      end
 
-    cookbook_file "/etc/bind/named.conf.options" do
-      source "named.conf.options"
-      owner "root"
-      group "root"
-      mode "0644"
-    end
+      cookbook_file "/etc/bind/named.conf.options" do
+        source "named.conf.options"
+        owner "root"
+        group "root"
+        mode "0644"
+      end
 
-    cookbook_file "/etc/bind/named.conf.local" do
-      source "named.conf.local"
-      owner "root"
-      group "root"
-      mode "0644"
-    end
+      cookbook_file "/etc/bind/named.conf.local" do
+        source "named.conf.local"
+        owner "root"
+        group "root"
+        mode "0644"
+      end
 
-    template "/etc/bind/db.myarpa" do
-      source "db.myarpa.erb"
-      owner "root"
-      group "root"
-      mode "0644"
-    end
+      template "/etc/bind/db.myarpa" do
+        source "db.myarpa.erb"
+        owner "root"
+        group "root"
+        mode "0644"
+      end
 
-    template "/etc/bind/db.myzone" do
-      source "db.myzone.erb"
-      owner "root"
-      group "root"
-      mode "0644"
-    end
+      template "/etc/bind/db.myzone" do
+        source "db.myzone.erb"
+        owner "root"
+        group "root"
+        mode "0644"
+      end
 
-    arpa = IPAddr.new(node[:ipaddress]).reverse
-    template "/etc/bind/myzone.conf" do
-      source "myzone.conf.erb"
-      owner "root"
-      group "root"
-      mode "0644"
-      variables({
-        :arpa => arpa,
-        :my_servers => my_servers
-      })
-      notifies :restart, "service[bind9]"
+      arpa = IPAddr.new(node[:ipaddress]).reverse
+      template "/etc/bind/myzone.conf" do
+        source "myzone.conf.erb"
+        owner "root"
+        group "root"
+        mode "0644"
+        variables({
+          :arpa => arpa,
+          :my_servers => my_servers
+        })
+        notifies :restart, "service[bind9]"
+      end
     end
 
   end
