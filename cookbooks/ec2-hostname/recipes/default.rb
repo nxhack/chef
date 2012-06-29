@@ -58,8 +58,8 @@ if node[:cloud][:provider] == 'ec2'
 
       # /etc/hosts is correct format (kernel hostname & hosts file)
       # So /bin/hostname -i is work
-      ipaddress=`/bin/hostname -i`
-      if node[:ipaddress] != ipaddress.chomp
+      ipaddress=`/bin/hostname -i`.chomp
+      if node[:ipaddress] != ipaddress
         template "/etc/hosts" do
           source "hosts.erb"
           owner "root"
