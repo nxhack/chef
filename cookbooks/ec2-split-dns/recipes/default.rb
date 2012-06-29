@@ -36,15 +36,15 @@ if node[:cloud][:provider] == 'ec2'
       mode "0644"
     end
 
-    template "/etc/bind/named.conf.options" do
-      source "named.conf.options.erb"
+    cookbook_file "/etc/bind/named.conf.options" do
+      source "named.conf.options"
       owner "root"
       group "root"
       mode "0644"
     end
 
-    template "/etc/bind/named.conf.local" do
-      source "named.conf.local.erb"
+    cookbook_file "/etc/bind/named.conf.local" do
+      source "named.conf.local"
       owner "root"
       group "root"
       mode "0644"

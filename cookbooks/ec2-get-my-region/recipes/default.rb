@@ -30,8 +30,8 @@ if node[:cloud][:provider] == 'ec2'
       action :nothing
     end
 
-    template "/tmp/.chef-ec2-get-my-region.stat" do
-      source ".chef-ec2-get-my-region.stat.erb"
+    template "#{Chef::Config[:file_cache_path]}/ec2-get-my-region.stat" do
+      source "ec2-get-my-region.stat.erb"
       owner "root"
       group "root"
       mode "0644"

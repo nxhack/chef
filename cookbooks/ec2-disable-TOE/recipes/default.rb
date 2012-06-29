@@ -42,7 +42,7 @@ if node[:cloud][:provider] == 'ec2'
       action :nothing
     end
 
-    template "/var/lib/chef/etc_network_interfaces" do
+    template "#{Chef::Config[:file_cache_path]}/etc_network_interfaces" do
       source "etc_network_interfaces"
       action :create_if_missing
       notifies :run, "execute[update-network_interfaces-1]", :immediately
