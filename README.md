@@ -27,6 +27,12 @@ recipe           "ec2-split-dns::ec2_set_resolver", "Setup dns resolver related 
 recipe           "ec2-get-my-region", "Store EC2 Region name to node attribute"
 </pre>
 
+* [ec2-split-dns-region](https://github.com/nxhack/chef/tree/master/cookbooks/ec2-split-dns-region)
+<pre>
+recipe           "ec2-split-dns-region", "Install bind9 and Setup dns zone files for Split DNS. (around same region)" 
+recipe           "ec2-split-dns-region::ec2_set_resolver", "Setup dns resolver related files. : /etc/resolv.conf /etc/dhcp3/dhclient.conf"
+</pre>
+
 * [ec2-lucid-backports](https://github.com/nxhack/chef/tree/master/cookbooks/ec2-lucid-backports)
 <pre>
 recipe           "ec2-lucid-backports", "Configure ec2 lucid backports repository"

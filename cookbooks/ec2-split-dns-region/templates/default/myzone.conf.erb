@@ -1,0 +1,24 @@
+zone "<%= node[:fqdn] %>" {
+	type master;
+	file "/etc/bind/db.myzone";
+};
+
+zone "<%= @arpa %>" {
+	type master;
+	file "/etc/bind/db.myarpa";
+};
+
+<% @my_servers.each do |server| -%>
+   <% if server[:fqdn] != node[:fqdn] -%>
+zone "<%= server[:fqdn] %>" {
+	type master;
+	file "/etc/bind/db.<%= server[:fqdn] %>.zone";
+};
+
+zone "<%= server[:ec2_arpa] %>" {
+	type master;
+	file "/etc/bind/db.<%= server[:fqdn] %>.arpa";
+};
+
+   <% end %>
+<% end %>
