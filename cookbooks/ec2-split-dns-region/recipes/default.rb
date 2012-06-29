@@ -32,7 +32,18 @@ if node[:cloud][:provider] == 'ec2'
     if Chef::Config[:solo]
       Chef::Log.warn("This recipe uses search. Chef Solo does not support search.")
     else
-      my_servers = search(:node,"ec2_region:us-east-1")
+
+      ec2_region=`curl -s http://169.254.169.254/latest/dynamic/instance-identity/document|grep region|awk -F\\" '{print $4}'`.chomp
+
+      ruby_block "set_my_region" do
+        block do
+          node.set[:ec2_region]=ec2_region
+          node.save
+        end
+        action :nothing
+      end
+
+      my_servers = search(:node,"ec2_region:#{ec2_region}")
 
       my_servers.each do |server|
         if server[:fqdn] != node[:fqdn] 
@@ -105,7 +116,8 @@ if node[:cloud][:provider] == 'ec2'
           :arpa => arpa,
           :my_servers => my_servers
         })
-        notifies :restart, "service[bind9]"
+        notifies :restart, "service[bind9]", :immediately
+        notifies :create, "ruby_block[set_my_region]", :immediately
       end
     end
 
