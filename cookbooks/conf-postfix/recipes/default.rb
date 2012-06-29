@@ -28,10 +28,14 @@ if node[:cloud][:provider] == 'ec2'
         `echo postfix postfix/mailname string #{ node[:fqdn] } | debconf-set-selections`
         `echo postfix postfix/mailname seen true | debconf-set-selections`
       end
-      action :create
+      action :nothing
     end
 
-    package "postfix"
+    package "postfix" do
+      notifies :create, "ruby_block[setup_postfix]", :immediately
+      action :install
+    end
+
     package "bsd-mailx"
 
   end
