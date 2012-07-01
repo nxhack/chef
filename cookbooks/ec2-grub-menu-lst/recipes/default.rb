@@ -21,13 +21,11 @@ if node[:cloud][:provider] == 'ec2'
   if node[:platform] == "ubuntu"
 
     execute "update-grub-menu-list-1" do
-      # command "sed --in-place 's|^# kopt=root=LABEL=cloudimg-rootfs ro|# kopt=root=#{node['root_device']} ro|' /boot/grub/menu.lst"
       command "sed --in-place 's|root=LABEL=cloudimg-rootfs ro|root=#{node['root_device']} ro|g' /boot/grub/menu.lst"
       action :nothing
     end
 
     execute "update-grub-menu-list-2" do
-      # command "sed --in-place 's|^# defoptions=xencons=hvc0 console=hvc0|# defoptions=xencons=hvc0 console=hvc0 #{node['kernel_options']}|' /boot/grub/menu.lst"
       command "sed --in-place 's|xencons=hvc0 console=hvc0|xencons=hvc0 console=hvc0 #{node['kernel_options']}|g' /boot/grub/menu.lst"
       action :nothing
     end
@@ -40,9 +38,9 @@ if node[:cloud][:provider] == 'ec2'
     template "#{Chef::Config[:file_cache_path]}/boot_grub_menu.lst" do
       source "boot_grub_menu.lst.erb"
       action :create_if_missing
-      notifies :run, resources(:execute => "update-grub-menu-list-1"), :immediately
-      notifies :run, resources(:execute => "update-grub-menu-list-2"), :immediately
-      notifies :run, resources(:execute => "update-grub-legacy-ec2"), :immediately
+      notifies :run, "execute[update-grub-menu-list-1]", :immediately
+      notifies :run, "execute[update-grub-menu-list-2]", :immediately
+      notifies :run, "execute[update-grub-legacy-ec2]", :immediately
     end
 
   end
