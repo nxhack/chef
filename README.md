@@ -102,3 +102,8 @@ recipe           "conf-tcpwrapper", "Configure TCP Wrapper : Setup /etc/hosts.al
 <pre>
 recipe           "conf-tmux", "Configure tmux : Setup for ubuntu account."
 </pre>
+
+* [conf-lm-sensors](https://github.com/nxhack/chef/tree/master/cookbooks/conf-lm-sensors)
+<pre>
+recipe           "conf-lm-sensors", "Install/Configure lm-sensors"
+</pre>
