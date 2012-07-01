@@ -58,6 +58,11 @@ recipe           "conf-unattended-upgrades", "Configure unattended-upgrades"
 recipe           "conf-postfix", "Installs/Configure postfix"
 </pre>
 
+* [conf-mysql51](https://github.com/nxhack/chef/tree/master/cookbooks/conf-mysql51)
+<pre>
+recipe           "conf-mysql51", "Installs/Configure MySQL 5.1"
+</pre>
+
 * [conf-cron-apt](https://github.com/nxhack/chef/tree/master/cookbooks/conf-cron-apt)
 <pre>
 recipe           "conf-cron-apt", "Configure cron-apt"
