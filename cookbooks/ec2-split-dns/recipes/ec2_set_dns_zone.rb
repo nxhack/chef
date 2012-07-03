@@ -27,7 +27,6 @@ if node[:cloud][:provider] == 'ec2'
       group "root"
       mode "0755"
       recursive true
-      action :create
     end
 
     cookbook_file "/usr/local/etc/init/ec2-set-dns-zone" do
@@ -42,7 +41,6 @@ if node[:cloud][:provider] == 'ec2'
       group "root"
       mode "0755"
       recursive true
-      action :create
     end
 
     cookbook_file "/usr/local/etc/bind/templates/arpa.tmpl" do

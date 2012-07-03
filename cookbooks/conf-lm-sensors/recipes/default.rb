@@ -32,8 +32,7 @@ if node[:cloud][:provider] == 'ec2'
       action :nothing
     end
 
-    cookbook_file "#{Chef::Config[:file_cache_path]}/conf_lm_sensors" do
-      source "conf_lm_sensors"
+    file "#{Chef::Config[:file_cache_path]}/conf-lm-sensors.done" do
       action :create_if_missing
       notifies :run, "execute[sensors_detect]", :immediately
       notifies :start, "service[module-init-tools]", :immediately

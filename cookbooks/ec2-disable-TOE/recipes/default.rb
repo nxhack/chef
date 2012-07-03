@@ -42,8 +42,7 @@ if node[:cloud][:provider] == 'ec2'
       action :nothing
     end
 
-    template "#{Chef::Config[:file_cache_path]}/etc_network_interfaces" do
-      source "etc_network_interfaces"
+    file "#{Chef::Config[:file_cache_path]}/ec2-disable-TOE.done" do
       action :create_if_missing
       notifies :run, "execute[update-network_interfaces-1]", :immediately
       notifies :run, "execute[update-network_interfaces-2]", :immediately

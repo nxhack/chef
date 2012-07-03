@@ -24,7 +24,6 @@ if node[:cloud][:provider] == 'ec2'
       owner "ubuntu"
       group "ubuntu"
       mode "0700"
-      action :create
     end
 
     cookbook_file "/home/ubuntu/.ssh/config" do

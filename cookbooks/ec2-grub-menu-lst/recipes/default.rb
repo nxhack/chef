@@ -35,8 +35,7 @@ if node[:cloud][:provider] == 'ec2'
       action :nothing
     end
 
-    template "#{Chef::Config[:file_cache_path]}/boot_grub_menu.lst" do
-      source "boot_grub_menu.lst.erb"
+    file "#{Chef::Config[:file_cache_path]}/ec2-grub-menu-lst.done" do
       action :create_if_missing
       notifies :run, "execute[update-grub-menu-list-1]", :immediately
       notifies :run, "execute[update-grub-menu-list-2]", :immediately
