@@ -63,6 +63,16 @@ recipe           "conf-postfix", "Installs/Configure postfix"
 recipe           "conf-mysql51", "Installs/Configure MySQL 5.1"
 </pre>
 
+* [conf-WordPress-JP](https://github.com/nxhack/chef/tree/master/cookbooks/conf-WordPress-JP)
+<pre>
+recipe           "conf-WordPress-JP", "Installs/Configure WordPress JP"
+</pre>
+
+* [conf-phpmyadmin](https://github.com/nxhack/chef/tree/master/cookbooks/conf-phpmyadmin)
+<pre>
+recipe           "conf-phpmyadmin", "Installs/Configure phpMyAdmin"
+</pre>
+
 * [conf-cron-apt](https://github.com/nxhack/chef/tree/master/cookbooks/conf-cron-apt)
 <pre>
 recipe           "conf-cron-apt", "Configure cron-apt"

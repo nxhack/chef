@@ -1,1 +1,1 @@
-default['mysql_root_pwd'] = "admin2MySQL"
+default['mysql_root_pwd'] = "admin0MySQL"
