@@ -122,3 +122,8 @@ recipe           "conf-tmux", "Configure tmux : Setup for ubuntu account."
 <pre>
 recipe           "conf-lm-sensors", "Install/Configure lm-sensors"
 </pre>
+
+* [ubuntu-ruby-ng](https://github.com/nxhack/chef/tree/master/cookbooks/ubuntu-ruby-ng)
+<pre>
+recipe           "ubuntu-ruby-ng", "Configure Next Generation Ubuntu Ruby Packages"
+</pre>
