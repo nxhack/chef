@@ -19,8 +19,8 @@
 
 require "ipaddr"
 
-if node[:cloud][:provider] == 'ec2'
-  if ['debian','ubuntu'].member? node[:platform]
+if node['cloud']['provider'] == 'ec2'
+  if ['debian','ubuntu'].member? node['platform']
 
     package "bind9"
 
@@ -64,7 +64,7 @@ if node[:cloud][:provider] == 'ec2'
       mode "0644"
     end
 
-    arpa = IPAddr.new(node[:ipaddress]).reverse
+    arpa = IPAddr.new(node['ipaddress']).reverse
     template "/etc/bind/myzone.conf" do
       source "myzone.conf.erb"
       owner "root"

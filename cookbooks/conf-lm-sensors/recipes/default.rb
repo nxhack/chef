@@ -18,8 +18,8 @@
 # limitations under the License.
 #
 
-if node[:cloud][:provider] == 'ec2'
-  if node[:platform] == "ubuntu"
+if node['cloud']['provider'] == 'ec2'
+  if node['platform'] == 'ubuntu'
 
     package "lm-sensors"
 

@@ -24,31 +24,31 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-if node[:cloud][:provider] == 'ec2'
-  if ['debian','ubuntu'].member? node[:platform]
-    fqdn = node[:set_fqdn]
+if node['cloud']['provider'] == 'ec2'
+  if ['debian','ubuntu'].member? node['platform']
+    fqdn = node['set_fqdn']
     if fqdn
       fqdn =~ /^([^.]+)/
       hostname = $1
       changed = false
 
-      if node[:hostname] != hostname
+      if node['hostname'] != hostname
         file '/etc/hostname' do
-          content "#{hostname}"
+          content hostname
           mode "0644"
         end
         execute "hostname -F /etc/hostname"
         changed=true
       end
 
-      if node[:fqdn] != fqdn
+      if node['fqdn'] != fqdn
         template "/etc/hosts" do
           source "hosts.erb"
           owner "root"
           group "root"
           mode "0644"
           variables({
-            :ipaddress => node[:ipaddress],
+            :ipaddress => node['ipaddress'],
             :fqdn => fqdn,
             :hostname => hostname
           })
@@ -58,15 +58,15 @@ if node[:cloud][:provider] == 'ec2'
 
       # /etc/hosts is correct format (kernel hostname & hosts file)
       # So /bin/hostname -i is work
-      ipaddress=`/bin/hostname -i`.chomp
-      if node[:ipaddress] != ipaddress
+      ipaddress = `/bin/hostname -i`.chomp
+      if node['ipaddress'] != ipaddress
         template "/etc/hosts" do
           source "hosts.erb"
           owner "root"
           group "root"
           mode "0644"
           variables({
-            :ipaddress => node[:ipaddress],
+            :ipaddress => node['ipaddress'],
             :fqdn => fqdn,
             :hostname => hostname
           })

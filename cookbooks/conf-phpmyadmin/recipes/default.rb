@@ -18,8 +18,10 @@
 # limitations under the License.
 #
 
-if node[:cloud][:provider] == 'ec2'
-  if node[:platform] == "ubuntu"
+if node['cloud']['provider'] == 'ec2'
+  if node['platform'] == 'ubuntu'
+
+    service "apache2"
 
     ruby_block "pre_setup_phpmyadmin" do
       block do
@@ -27,9 +29,9 @@ if node[:cloud][:provider] == 'ec2'
         `echo phpmyadmin phpmyadmin/reconfigure-webserver seen true | debconf-set-selections`
         `echo phpmyadmin phpmyadmin/dbconfig-install boolean true | debconf-set-selections`
         `echo phpmyadmin phpmyadmin/dbconfig-install seen true | debconf-set-selections`
-        `echo phpmyadmin phpmyadmin/mysql/admin-pass password #{ node[:mysql_root_pwd] } | debconf-set-selections`
-        `echo phpmyadmin phpmyadmin/mysql/app-pass password #{ node[:phpmyadmin_pwd] } | debconf-set-selections`
-        `echo phpmyadmin phpmyadmin/app-password-confirm password #{ node[:phpmyadmin_pwd] } | debconf-set-selections`
+        `echo phpmyadmin phpmyadmin/mysql/admin-pass password #{node['mysql_root_pwd']} | debconf-set-selections`
+        `echo phpmyadmin phpmyadmin/mysql/app-pass password #{node['phpmyadmin_pwd']} | debconf-set-selections`
+        `echo phpmyadmin phpmyadmin/app-password-confirm password #{node['phpmyadmin_pwd']} | debconf-set-selections`
       end
       action :create
       not_if { ::File.exists?("/etc/phpmyadmin/config.inc.php")}
@@ -55,10 +57,7 @@ if node[:cloud][:provider] == 'ec2'
 
     link "/etc/apache2/conf.d/phpmyadmin-auth.conf" do
       to "/etc/phpmyadmin/apache2-auth.conf"
-    end
-
-    service "apache2" do
-      action :restart
+      notifies :restart, "service[apache2]", :immediately
     end
 
   end

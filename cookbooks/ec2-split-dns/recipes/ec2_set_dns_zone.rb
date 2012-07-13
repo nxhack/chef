@@ -17,8 +17,8 @@
 # limitations under the License.
 #
 
-if node[:cloud][:provider] == 'ec2'
-  if ['debian','ubuntu'].member? node[:platform]
+if node['cloud']['provider'] == 'ec2'
+  if ['debian','ubuntu'].member? node['platform']
 
     package "python-ipy"
 

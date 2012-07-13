@@ -17,14 +17,14 @@
 # limitations under the License.
 #
 
-if node[:cloud][:provider] == 'ec2'
-  if node[:platform] == "ubuntu"
+if node['cloud']['provider'] == 'ec2'
+  if node['platform'] == 'ubuntu'
 
-    ec2_region=`curl -s http://169.254.169.254/latest/dynamic/instance-identity/document|grep region|awk -F\\" '{print $4}'`.chomp
+    ec2_region = `curl -s http://169.254.169.254/latest/dynamic/instance-identity/document|grep region|awk -F\\" '{print $4}'`.chomp
 
     ruby_block "get_my_region" do
       block do
-        node.set[:ec2_region]=ec2_region
+        node.set['ec2_region'] = ec2_region
         node.save
       end
       action :nothing

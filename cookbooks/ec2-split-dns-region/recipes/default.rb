@@ -19,8 +19,8 @@
 
 require "ipaddr"
 
-if node[:cloud][:provider] == 'ec2'
-  if ['debian','ubuntu'].member? node[:platform]
+if node['cloud']['provider'] == 'ec2'
+  if ['debian','ubuntu'].member? node['platform']
 
     package "bind9"
 
@@ -33,11 +33,11 @@ if node[:cloud][:provider] == 'ec2'
       Chef::Log.warn("This recipe uses search. Chef Solo does not support search.")
     else
 
-      ec2_region=`curl -s http://169.254.169.254/latest/dynamic/instance-identity/document|grep region|awk -F\\" '{print $4}'`.chomp
+      ec2_region = `curl -s http://169.254.169.254/latest/dynamic/instance-identity/document|grep region|awk -F\\" '{print $4}'`.chomp
 
       ruby_block "set_my_region" do
         block do
-          node.set[:ec2_region]=ec2_region
+          node.set['ec2_region'] = ec2_region
           node.save
         end
         action :nothing
@@ -46,26 +46,26 @@ if node[:cloud][:provider] == 'ec2'
       my_servers = search(:node,"ec2_region:#{ec2_region}")
 
       my_servers.each do |server|
-        if server[:fqdn] != node[:fqdn] 
-          server[:ec2_arpa] = IPAddr.new(server[:ipaddress]).reverse
+        if server['fqdn'] != node['fqdn'] 
+          server['ec2_arpa'] = IPAddr.new(server['ipaddress']).reverse
 
-          template "/etc/bind/db.#{server[:fqdn]}.arpa" do
+          template "/etc/bind/db.#{server['fqdn']}.arpa" do
             source "db.otherarpa.erb"
             owner "root"
             group "root"
             mode "0644"
             variables({
-              :fqdn => server[:fqdn]
+              :fqdn => server['fqdn']
             })
           end
 
-          template "/etc/bind/db.#{server[:fqdn]}.zone" do
+          template "/etc/bind/db.#{server['fqdn']}.zone" do
             source "db.otherzone.erb"
             owner "root"
             group "root"
             mode "0644"
             variables({
-              :ipaddress => server[:ipaddress]
+              :ipaddress => server['ipaddress']
             })
           end
         end
@@ -106,7 +106,7 @@ if node[:cloud][:provider] == 'ec2'
         mode "0644"
       end
 
-      arpa = IPAddr.new(node[:ipaddress]).reverse
+      arpa = IPAddr.new(node['ipaddress']).reverse
       template "/etc/bind/myzone.conf" do
         source "myzone.conf.erb"
         owner "root"

@@ -18,14 +18,14 @@
 # limitations under the License.
 #
 
-if node[:cloud][:provider] == 'ec2'
-  if node[:platform] == "ubuntu"
+if node['cloud']['provider'] == 'ec2'
+  if node['platform'] == 'ubuntu'
 
     ruby_block "setup_postfix" do
       block do
         `echo postfix postfix/main_mailer_type select Internet Site | debconf-set-selections`
         `echo postfix postfix/main_mailer_type seen true | debconf-set-selections`
-        `echo postfix postfix/mailname string #{ node[:fqdn] } | debconf-set-selections`
+        `echo postfix postfix/mailname string #{node['fqdn']} | debconf-set-selections`
         `echo postfix postfix/mailname seen true | debconf-set-selections`
       end
       action :create

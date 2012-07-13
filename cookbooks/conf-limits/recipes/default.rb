@@ -17,8 +17,8 @@
 # limitations under the License.
 #
 
-if node[:cloud][:provider] == 'ec2'
-  if node[:platform] == "ubuntu"
+if node['cloud']['provider'] == 'ec2'
+  if node['platform'] == 'ubuntu'
 
     cookbook_file "/etc/security/limits.d/mylimits.conf" do
       source "mylimits.conf"

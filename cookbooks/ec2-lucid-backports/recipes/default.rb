@@ -17,8 +17,8 @@
 # limitations under the License.
 #
 
-if node[:cloud][:provider] == 'ec2'
-  if node[:platform] == "ubuntu"
+if node['cloud']['provider'] == 'ec2'
+  if node['platform'] == 'ubuntu'
 
     execute "apt-update" do
       command "/usr/bin/aptitude update"

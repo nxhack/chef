@@ -17,16 +17,13 @@
 # limitations under the License.
 #
 
-if ['debian','ubuntu'].member? node[:platform]
-
-    template "/etc/hosts.allow" do
-      source "hosts.allow.erb"
-      owner "root"
-      group "root"
-      mode "0644"
-      variables({
-        :allowhosts => node['ssh_allow_hosts']
-      })
-    end
-
+template "/etc/hosts.allow" do
+  source "hosts.allow.erb"
+  owner "root"
+  group "root"
+  mode "0644"
+  variables({
+    :allowhosts => node['ssh_allow_hosts']
+  })
+  only_if { ['debian','ubuntu'].member? node['platform'] }
 end

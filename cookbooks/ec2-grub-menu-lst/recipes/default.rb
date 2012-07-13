@@ -17,8 +17,8 @@
 # limitations under the License.
 #
 
-if node[:cloud][:provider] == 'ec2'
-  if node[:platform] == "ubuntu"
+if node['cloud']['provider'] == 'ec2'
+  if node['platform'] == 'ubuntu'
 
     execute "update-grub-menu-list-1" do
       command "sed --in-place 's|root=LABEL=cloudimg-rootfs ro|root=#{node['root_device']} ro|g' /boot/grub/menu.lst"

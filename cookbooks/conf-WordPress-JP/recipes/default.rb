@@ -18,8 +18,10 @@
 # limitations under the License.
 #
 
-if node[:cloud][:provider] == 'ec2'
-  if node[:platform] == "ubuntu"
+if node['cloud']['provider'] == 'ec2'
+  if node['platform'] == 'ubuntu'
+
+    service "apache2"
 
     ruby_block "force_setup_wordpress" do
       block do
@@ -74,10 +76,7 @@ if node[:cloud][:provider] == 'ec2'
 
     link "/etc/apache2/conf.d/wordpress.conf" do
       to "/etc/wordpress-jp/apache2.conf"
-    end
-
-    service "apache2" do
-      action :start
+      notifies :start, "service[apache2]", :immediately
     end
 
   end

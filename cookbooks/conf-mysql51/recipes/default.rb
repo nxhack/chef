@@ -18,14 +18,14 @@
 # limitations under the License.
 #
 
-if node[:cloud][:provider] == 'ec2'
-  if node[:platform] == "ubuntu"
+if node['cloud']['provider'] == 'ec2'
+  if node['platform'] == 'ubuntu'
 
     ruby_block "setup_mysql" do
       block do
-        `echo mysql-server-5.1 mysql-server/root_password password #{ node[:mysql_root_pwd] } | debconf-set-selections`
+        `echo mysql-server-5.1 mysql-server/root_password password #{node['mysql_root_pwd']} | debconf-set-selections`
         `echo mysql-server-5.1 mysql-server/root_password seen true | debconf-set-selections`
-        `echo mysql-server-5.1 mysql-server/root_password_again password #{ node[:mysql_root_pwd] } | debconf-set-selections`
+        `echo mysql-server-5.1 mysql-server/root_password_again password #{node['mysql_root_pwd']} | debconf-set-selections`
         `echo mysql-server-5.1 mysql-server/root_password_again seen true | debconf-set-selections`
         `echo mysql-server-5.1 mysql-server/start_on_boot boolean true | debconf-set-selections`
       end

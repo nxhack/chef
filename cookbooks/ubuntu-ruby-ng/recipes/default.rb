@@ -19,7 +19,7 @@
 
 if node['platform'] == 'ubuntu'
 
-  ruby_block "setup_brightboxforce_ruby_ng" do
+  ruby_block "setup_brightbox_ruby_ng" do
       block do
         `apt-add-repository ppa:brightbox/ruby-ng`
         `aptitude update`
