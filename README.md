@@ -132,3 +132,8 @@ recipe           "ubuntu-ruby-ng", "Configure Next Generation Ubuntu Ruby Packag
 <pre>
 recipe           "conf-memcache", "Installs/Configures memcache"
 </pre>
+
+* [conf-php-mcrypt](https://github.com/nxhack/chef/tree/master/cookbooks/conf-php-mcrypt)
+<pre>
+recipe           "conf-php-mcrypt", "Fix bad comment at mcrypt.ini"
+</pre>
