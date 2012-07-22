@@ -127,3 +127,8 @@ recipe           "conf-lm-sensors", "Install/Configure lm-sensors"
 <pre>
 recipe           "ubuntu-ruby-ng", "Configure Next Generation Ubuntu Ruby Packages"
 </pre>
+
+* [conf-memcache](https://github.com/nxhack/chef/tree/master/cookbooks/conf-memcache)
+<pre>
+recipe           "conf-memcache", "Installs/Configures memcache"
+</pre>
