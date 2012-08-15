@@ -35,5 +35,8 @@ if node['cloud']['provider'] == 'ec2'
 
     package "mysql-server-5.1"
 
+    # install metapackage !!
+    package "mysql-server"
+
   end
 end
