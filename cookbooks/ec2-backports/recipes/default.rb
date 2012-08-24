@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: ec2-lucid-backports
+# Cookbook Name:: ec2-backports
 # Recipe:: default
 #
 # Copyright 2012, Hirokazu MORIKAWA
@@ -20,26 +20,33 @@
 if node['cloud']['provider'] == 'ec2'
   if node['platform'] == 'ubuntu'
 
+    codename = node['lsb']['codename']
+
     execute "apt-update" do
       command "/usr/bin/aptitude update"
       action :nothing
     end
 
-    cookbook_file "/etc/apt/preferences.d/backports" do
-      source "backports"
+    template "/etc/apt/preferences.d/backports" do
+      source "backports.erb"
       owner "root"
       group "root"
       mode "0644"
+      variables({
+         :codename => codename
+      })
     end
 
-    cookbook_file "/etc/apt/sources.list.d/backports.list" do
-      source "backports.list"
+    template "/etc/apt/sources.list.d/backports.list" do
+      source "backports.list.erb"
       owner "root"
       group "root"
       mode "0644"
+      variables({
+         :codename => codename
+      })
       notifies :run, "execute[apt-update]", :immediately
     end
-
 
   end
 end

@@ -23,7 +23,9 @@ template "/etc/hosts.allow" do
   group "root"
   mode "0644"
   variables({
-    :allowhosts => node['ssh_allow_hosts']
+    :allowhosts => node['ssh_allow_hosts'],
+    :fqdn => node['fqdn'],
+    :ipaddress => node['ipaddress']
   })
   only_if { ['debian','ubuntu'].member? node['platform'] }
 end

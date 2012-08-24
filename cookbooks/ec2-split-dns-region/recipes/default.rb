@@ -97,6 +97,9 @@ if node['cloud']['provider'] == 'ec2'
         owner "root"
         group "root"
         mode "0644"
+        variables({
+          :fqdn => node['fqdn']
+        })
       end
 
       template "/etc/bind/db.myzone" do
@@ -104,6 +107,9 @@ if node['cloud']['provider'] == 'ec2'
         owner "root"
         group "root"
         mode "0644"
+        variables({
+          :ipaddress => node['ipaddress']
+        })
       end
 
       arpa = IPAddr.new(node['ipaddress']).reverse
@@ -114,7 +120,8 @@ if node['cloud']['provider'] == 'ec2'
         mode "0644"
         variables({
           :arpa => arpa,
-          :my_servers => my_servers
+          :my_servers => my_servers,
+          :fqdn => node['fqdn']
         })
         notifies :restart, "service[bind9]", :immediately
         notifies :create, "ruby_block[set_my_region]", :immediately

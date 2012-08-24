@@ -33,9 +33,9 @@ recipe           "ec2-split-dns-region", "Install bind9 and Setup dns zone files
 recipe           "ec2-split-dns-region::ec2_set_resolver", "Setup dns resolver related files. : /etc/resolv.conf /etc/dhcp3/dhclient.conf"
 </pre>
 
-* [ec2-lucid-backports](https://github.com/nxhack/chef/tree/master/cookbooks/ec2-lucid-backports)
+* [ec2-backports](https://github.com/nxhack/chef/tree/master/cookbooks/ec2-backports)
 <pre>
-recipe           "ec2-lucid-backports", "Configure ec2 lucid backports repository"
+recipe           "ec2-backports", "Configure ec2 backports repository"
 </pre>
 
 * [ec2-grub-menu-lst](https://github.com/nxhack/chef/tree/master/cookbooks/ec2-grub-menu-lst)
@@ -58,9 +58,9 @@ recipe           "conf-unattended-upgrades", "Configure unattended-upgrades"
 recipe           "conf-postfix", "Installs/Configure postfix"
 </pre>
 
-* [conf-mysql51](https://github.com/nxhack/chef/tree/master/cookbooks/conf-mysql51)
+* [conf-mysql](https://github.com/nxhack/chef/tree/master/cookbooks/conf-mysql)
 <pre>
-recipe           "conf-mysql51", "Installs/Configure MySQL 5.1"
+recipe           "conf-mysql", "Installs/Configure MySQL"
 </pre>
 
 * [conf-WordPress-JP](https://github.com/nxhack/chef/tree/master/cookbooks/conf-WordPress-JP)

@@ -29,6 +29,14 @@ if node['cloud']['provider'] == 'ec2'
         `echo phpmyadmin phpmyadmin/reconfigure-webserver seen true | debconf-set-selections`
         `echo phpmyadmin phpmyadmin/dbconfig-install boolean true | debconf-set-selections`
         `echo phpmyadmin phpmyadmin/dbconfig-install seen true | debconf-set-selections`
+        `echo phpmyadmin phpmyadmin/db/app-user string phpmyadmin | debconf-set-selections`
+        `echo phpmyadmin phpmyadmin/db/app-user seen true | debconf-set-selections`
+        `echo phpmyadmin phpmyadmin/db/dbname string phpmyadmin | debconf-set-selections`
+        `echo phpmyadmin phpmyadmin/db/dbname seen true | debconf-set-selections`
+        `echo phpmyadmin phpmyadmin/mysql/method multiselect 'unix socket' | debconf-set-selections`
+        `echo phpmyadmin phpmyadmin/mysql/method seen true | debconf-set-selections`
+        `echo phpmyadmin phpmyadmin/mysql/admin-user string root | debconf-set-selections`
+        `echo phpmyadmin phpmyadmin/mysql/admin-user seen true | debconf-set-selections`
         `echo phpmyadmin phpmyadmin/mysql/admin-pass password #{node['mysql_root_pwd']} | debconf-set-selections`
         `echo phpmyadmin phpmyadmin/mysql/app-pass password #{node['phpmyadmin_pwd']} | debconf-set-selections`
         `echo phpmyadmin phpmyadmin/app-password-confirm password #{node['phpmyadmin_pwd']} | debconf-set-selections`

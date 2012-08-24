@@ -21,22 +21,27 @@
 if node['cloud']['provider'] == 'ec2'
   if node['platform'] == 'ubuntu'
 
+    mysql_ver = '5.1'
+    if node['lsb']['codename'] == 'precise'
+      mysql_ver = '5.5'
+    end
+
     ruby_block "setup_mysql" do
       block do
-        `echo mysql-server-5.1 mysql-server/root_password password #{node['mysql_root_pwd']} | debconf-set-selections`
-        `echo mysql-server-5.1 mysql-server/root_password seen true | debconf-set-selections`
-        `echo mysql-server-5.1 mysql-server/root_password_again password #{node['mysql_root_pwd']} | debconf-set-selections`
-        `echo mysql-server-5.1 mysql-server/root_password_again seen true | debconf-set-selections`
-        `echo mysql-server-5.1 mysql-server/start_on_boot boolean true | debconf-set-selections`
+        `echo mysql-server-#{mysql_ver} mysql-server/root_password password #{node['mysql_root_pwd']} | debconf-set-selections`
+        `echo mysql-server-#{mysql_ver} mysql-server/root_password seen true | debconf-set-selections`
+        `echo mysql-server-#{mysql_ver} mysql-server/root_password_again password #{node['mysql_root_pwd']} | debconf-set-selections`
+        `echo mysql-server-#{mysql_ver} mysql-server/root_password_again seen true | debconf-set-selections`
+        `echo mysql-server-#{mysql_ver} mysql-server/start_on_boot boolean true | debconf-set-selections`
       end
       action :create
       not_if { ::File.exists?("/etc/mysql/my.cnf")}
     end
 
-    package "mysql-server-5.1"
-
-    # install metapackage !!
     package "mysql-server"
+
+    # install client metapackage !!
+    package "mysql-client"
 
   end
 end

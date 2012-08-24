@@ -41,6 +41,9 @@ if node['cloud']['provider'] == 'ec2'
       owner "root"
       group "root"
       mode "0644"
+      variables({
+         :mailaddress_of_sysadmin => node['mailaddress_of_sysadmin']
+      })
     end
 
   end

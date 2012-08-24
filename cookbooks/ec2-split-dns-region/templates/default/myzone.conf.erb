@@ -1,4 +1,4 @@
-zone "<%= node['fqdn'] %>" {
+zone "<%= @fqdn %>" {
 	type master;
 	file "/etc/bind/db.myzone";
 };
@@ -9,7 +9,7 @@ zone "<%= @arpa %>" {
 };
 
 <% @my_servers.each do |server| -%>
-   <% if server['fqdn'] != node['fqdn'] -%>
+   <% if server['fqdn'] != @fqdn -%>
 zone "<%= server['fqdn'] %>" {
 	type master;
 	file "/etc/bind/db.<%= server['fqdn'] %>.zone";

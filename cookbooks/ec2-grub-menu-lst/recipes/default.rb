@@ -20,13 +20,19 @@
 if node['cloud']['provider'] == 'ec2'
   if node['platform'] == 'ubuntu'
 
+    if node['os_version'] =~ /^3\./
+      root_device = node['root_device_3']
+    else
+      root_device = node['root_device_2']
+    end
+
     execute "update-grub-menu-list-1" do
-      command "sed --in-place 's|root=LABEL=cloudimg-rootfs ro|root=#{node['root_device']} ro|g' /boot/grub/menu.lst"
+      command "sed --in-place 's|root=LABEL=cloudimg-rootfs ro|root=#{root_device} ro|g' /boot/grub/menu.lst"
       action :nothing
     end
 
     execute "update-grub-menu-list-2" do
-      command "sed --in-place 's|xencons=hvc0 console=hvc0|xencons=hvc0 console=hvc0 #{node['kernel_options']}|g' /boot/grub/menu.lst"
+      command "sed --in-place 's|console=hvc0|console=hvc0 #{node['kernel_options']}|g' /boot/grub/menu.lst"
       action :nothing
     end
 

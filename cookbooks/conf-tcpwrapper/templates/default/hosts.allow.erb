@@ -30,7 +30,7 @@
 sshd : <%= host %> : allow
 <% end %>
 sshd : localhost 127.0.0.1 : allow
-sshd : <%= node['fqdn'] %> <%= node['ipaddress'] %> : allow
+sshd : <%= @fqdn %> <%= @ipaddress %> : allow
 sshd : ALL : deny
 
 # Protect against simple DNS spoofing attacks by checking that the
@@ -46,7 +46,7 @@ sshd : ALL : deny
 ALL : localhost 127.0.0.1 : allow
 # Comment out next line if you build libwrap without IPv6 support.
 ALL : [::1] : allow
-ALL : <%= node['fqdn'] %> <%= node['ipaddress'] %> : allow
+ALL : <%= @fqdn %> <%= @ipaddress %> : allow
 
 # Exim is an alternative to sendmail, available in the ports tree
 exim : localhost : allow

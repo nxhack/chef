@@ -16,7 +16,7 @@ option rfc3442-classless-static-routes code 121 = array of unsigned integer 8;
 send host-name "<hostname>";
 #send dhcp-client-identifier 1:0:a0:24:ab:fb:9c;
 #send dhcp-lease-time 3600;
-supersede domain-name "<%= node['domain'] %>";
+supersede domain-name "<%= @domain %>";
 prepend domain-name-servers 127.0.0.1;
 request subnet-mask, broadcast-address, time-offset, routers,
 	domain-name, domain-name-servers, domain-search, host-name,

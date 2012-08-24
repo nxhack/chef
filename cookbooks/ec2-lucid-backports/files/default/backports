@@ -1,3 +1,0 @@
-Package: *
-Pin: release a=lucid-backports
-Pin-Priority: 100

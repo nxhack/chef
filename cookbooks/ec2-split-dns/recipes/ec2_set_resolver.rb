@@ -20,18 +20,34 @@
 if node['cloud']['provider'] == 'ec2'
   if ['debian','ubuntu'].member? node['platform']
 
-    template "/etc/dhcp3/dhclient.conf" do
+    dhclientconf = '/etc/dhcp3/dhclient.conf'
+    if node['lsb']['codename'] == 'precise'
+      dhclientconf = '/etc/dhcp/dhclient.conf'
+    end
+
+    template dhclientconf do
       source "dhclient.conf.erb"
       owner "root"
       group "root"
       mode "0644"
+      variables({
+         :domain => node['domain']
+      })
     end
 
-    template "/etc/resolv.conf" do
+    resolvconf = '/etc/resolv.conf'
+    if node['lsb']['codename'] == 'precise'
+      resolvconf = '/etc/resolvconf/resolv.conf.d/base'
+    end
+
+    template resolvconf do
       source "resolv.conf.erb"
       owner "root"
       group "root"
       mode "0644"
+      variables({
+         :domain => node['domain']
+      })
     end
 
   end

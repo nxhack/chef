@@ -23,6 +23,7 @@ if node['cloud']['provider'] == 'ec2'
     execute "fix_bad_comment" do
       command "sed --in-place 's|^#|;|g' /etc/php5/apache2/conf.d/mcrypt.ini"
       action :nothing
+      ignore_failure true
     end
 
     service "apache2"

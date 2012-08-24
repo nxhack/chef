@@ -1,4 +1,4 @@
-zone "<%= node['fqdn'] %>" {
+zone "<%= @fqdn %>" {
 	type master;
 	file "/etc/bind/db.myzone";
 };

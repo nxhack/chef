@@ -20,18 +20,25 @@
 if node['cloud']['provider'] == 'ec2'
   if node['platform'] == 'ubuntu'
 
-    cookbook_file "/etc/apt/apt.conf.d/10periodic" do
-      source "10periodic"
-      owner "root"
-      group "root"
-      mode "0644"
-    end
+    if node['lsb']['codename'] == 'lucid' 
 
-    template "/etc/apt/apt.conf.d/50unattended-upgrades" do
-      source "50unattended-upgrades.erb"
-      owner "root"
-      group "root"
-      mode "0644"
+      cookbook_file "/etc/apt/apt.conf.d/10periodic" do
+        source "10periodic"
+        owner "root"
+        group "root"
+        mode "0644"
+      end
+
+      template "/etc/apt/apt.conf.d/50unattended-upgrades" do
+        source "50unattended-upgrades.erb"
+        owner "root"
+        group "root"
+        mode "0644"
+        variables({
+           :mailaddress_of_sysadmin => node['mailaddress_of_sysadmin']
+        })
+      end
+
     end
 
   end

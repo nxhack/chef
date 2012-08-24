@@ -1,6 +1,6 @@
 Description
 ===========
-Installs/Configures MySQL 5.1
+Configure ec2 backports repository
 
 Requirements
 ============
