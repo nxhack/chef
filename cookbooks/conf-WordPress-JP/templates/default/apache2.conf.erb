@@ -1,4 +1,6 @@
-<Directory /var/www/blog>
+Alias /blog /<%= @distdir %>/www/blog
+
+<Directory /<%= @distdir %>/www/blog>
 	   Options +FollowSymLinks
 	   AllowOverride FileInfo
 	   DirectoryIndex index.php

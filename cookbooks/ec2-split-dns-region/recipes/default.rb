@@ -43,6 +43,12 @@ if node['cloud']['provider'] == 'ec2'
         action :nothing
       end
 
+      execute "update_resolvconf" do
+        command "/sbin/resolvconf -u"
+        action :nothing
+        only_if { node['lsb']['codename'] == 'precise' }
+      end
+
       my_servers = search(:node,"ec2_region:#{ec2_region}")
 
       my_servers.each do |server|
@@ -125,6 +131,7 @@ if node['cloud']['provider'] == 'ec2'
         })
         notifies :restart, "service[bind9]", :immediately
         notifies :create, "ruby_block[set_my_region]", :immediately
+        notifies :run, "execute[update_resolvconf]", :immediately
       end
     end
 

@@ -9,7 +9,7 @@ Setup chef client using apt from opscode repository.
 
 * [ubuntu10.04-omnibus-ec2](https://github.com/nxhack/chef/blob/master/bootstrap/ubuntu10.04-omnibus-ec2.erb)
 <pre>
-Setup chef client using omnibus from opscode repository.
+Setup chef client using opscode omnibus.
 </pre>
 
 ## cookbooks

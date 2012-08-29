@@ -23,6 +23,11 @@ if node['cloud']['provider'] == 'ec2'
 
     service "apache2"
 
+    distdir = 'var'
+    if node['lsb']['codename'] == 'precise'
+      distdir = 'srv'
+    end
+
     ruby_block "force_setup_wordpress" do
       block do
         `aptitude -y install wordpress`
@@ -34,8 +39,9 @@ if node['cloud']['provider'] == 'ec2'
         `apt-get -y remove wordpress`
         `aptitude keep-all`
         `aptitude -y purge wordpress`
-        `rm /var/www/localhost`
-        `rm -rf /var/www/wp-uploads`
+        `chgrp www-data /#{distdir}/www`
+        `rm /#{distdir}/www/localhost`
+        `rm -rf /#{distdir}/www/wp-uploads`
         `cat /etc/wordpress-jp/config-localhost.php | fgrep -v '/localhost' > /etc/wordpress-jp/config-jp.php`
         `chmod 640 /etc/wordpress-jp/config-jp.php`
         `chgrp www-data /etc/wordpress-jp/config-jp.php`
@@ -45,32 +51,38 @@ if node['cloud']['provider'] == 'ec2'
       not_if { ::File.exists?("/etc/wordpress-jp/wp-config.php")}
     end
 
-    cookbook_file "/etc/wordpress-jp/wp-config.php" do
-      source "wp-config.php"
+    template "/etc/wordpress-jp/wp-config.php" do
+      source "wp-config.php.erb"
       owner "root"
       group "root"
       mode "0644"
+      variables({
+         :distdir => distdir
+      })
     end
 
-    cookbook_file "/etc/wordpress-jp/apache2.conf" do
-      source "apache2.conf"
+    template "/etc/wordpress-jp/apache2.conf" do
+      source "apache2.conf.erb"
       owner "root"
       group "root"
       mode "0644"
+      variables({
+         :distdir => distdir
+      })
     end
 
     ruby_block "force_install_wordpress_jp" do
       block do
         `wget -qO - http://ja.wordpress.org/latest-ja.tar.gz > #{Chef::Config[:file_cache_path]}/wordpress-latest-ja.tar.gz`
-        `tar xfz #{Chef::Config[:file_cache_path]}/wordpress-latest-ja.tar.gz -C /var/www`
-        `mv /var/www/wordpress /var/www/blog`
-        `chown -R www-data:www-data /var/www/blog`
+        `tar xfz #{Chef::Config[:file_cache_path]}/wordpress-latest-ja.tar.gz -C /#{distdir}/www`
+        `mv /#{distdir}/www/wordpress /#{distdir}/www/blog`
+        `chown -R www-data:www-data /#{distdir}/www/blog`
       end
       action :create
       not_if { ::File.exists?("/etc/apache2/conf.d/wordpress.conf")}
     end
 
-    link "/var/www/blog/wp-config.php" do
+    link "/#{distdir}/www/blog/wp-config.php" do
       to "/etc/wordpress-jp/wp-config.php"
     end
 

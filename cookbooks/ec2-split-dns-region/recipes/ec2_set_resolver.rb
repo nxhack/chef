@@ -35,6 +35,12 @@ if node['cloud']['provider'] == 'ec2'
       })
     end
 
+    execute "update_resolvconf" do
+      command "/sbin/resolvconf -u"
+      action :nothing
+      only_if { node['lsb']['codename'] == 'precise' }
+    end
+
     resolvconf = '/etc/resolv.conf'
     if node['lsb']['codename'] == 'precise'
       resolvconf = '/etc/resolvconf/resolv.conf.d/base'
@@ -48,6 +54,7 @@ if node['cloud']['provider'] == 'ec2'
       variables({
         :domain => node['domain']
       })
+      notifies :run, "execute[update_resolvconf]", :immediately
     end
 
   end

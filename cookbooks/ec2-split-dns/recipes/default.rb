@@ -29,6 +29,12 @@ if node['cloud']['provider'] == 'ec2'
       action [ :enable, :start ]
     end
 
+    execute "update_resolvconf" do
+      command "/sbin/resolvconf -u"
+      action :nothing
+      only_if { node['lsb']['codename'] == 'precise' }
+    end
+
     cookbook_file "/etc/default/bind9" do
       source "bind9"
       owner "root"
@@ -80,7 +86,8 @@ if node['cloud']['provider'] == 'ec2'
         :arpa => arpa,
         :fqdn => node['fqdn']
       })
-      notifies :restart, "service[bind9]"
+      notifies :restart, "service[bind9]", :immediately
+      notifies :run, "execute[update_resolvconf]", :immediately
     end
 
   end
