@@ -2,17 +2,14 @@
 
 ## bootstrap
 
-* [ubuntu10.04-apt-ec2](https://github.com/nxhack/chef/blob/master/bootstrap/ubuntu10.04-apt-ec2.erb)
-<pre>
-Setup chef client using apt from opscode repository.
-</pre>
-
-* [ubuntu10.04-omnibus-ec2](https://github.com/nxhack/chef/blob/master/bootstrap/ubuntu10.04-omnibus-ec2.erb)
-<pre>
-Setup chef client using opscode omnibus.
-</pre>
+Use! Opscode Omnibus.
 
 ## cookbooks
+
+* [ec2-base-settings](https://github.com/nxhack/chef/tree/master/cookbooks/ec2-base-settings)
+<pre>
+recipe           "ec2-base-settings", "Configures common settings & Installs common packages for EC2."
+</pre>
 
 * [ec2-hostname](https://github.com/nxhack/chef/tree/master/cookbooks/ec2-hostname)
 <pre>
