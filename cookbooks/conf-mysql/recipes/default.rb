@@ -43,5 +43,15 @@ if node['cloud']['provider'] == 'ec2'
     # install client metapackage !!
     package "mysql-client"
 
+    service "mysql"
+
+    cookbook_file "/etc/mysql/my.cnf" do
+      source "my.cnf"
+      owner "root"
+      group "root"
+      mode "0644"
+      notifies :restart, "service[mysql]", :immediately
+    end
+
   end
 end
