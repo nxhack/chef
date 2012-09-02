@@ -135,7 +135,17 @@ recipe           "ubuntu-ruby-ng", "Configure Next Generation Ubuntu Ruby Packag
 recipe           "conf-memcache", "Installs/Configures memcache"
 </pre>
 
+* [conf-php-apc](https://github.com/nxhack/chef/tree/master/cookbooks/conf-php-apc)
+<pre>
+recipe           "conf-php-apc", "Installs/Configures php APC"
+</pre>
+
 * [conf-php-mcrypt](https://github.com/nxhack/chef/tree/master/cookbooks/conf-php-mcrypt)
 <pre>
 recipe           "conf-php-mcrypt", "Fix bad comment at mcrypt.ini"
+</pre>
+
+* [conf-varnish](https://github.com/nxhack/chef/tree/master/cookbooks/conf-varnish)
+<pre>
+recipe           "conf-varnish", "Installs/Configures varnish and apache2"
 </pre>
