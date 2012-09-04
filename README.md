@@ -70,6 +70,11 @@ recipe           "conf-mysql", "Installs/Configure MySQL"
 recipe           "conf-WordPress-JP", "Installs/Configure WordPress JP"
 </pre>
 
+* [conf-WordPress-cli](https://github.com/nxhack/chef/tree/master/cookbooks/conf-WordPress-cli)
+<pre>
+recipe           "conf-WordPress-cli", "Installs/Configures WordPress CLI tools and Plugins"
+</pre>
+
 * [conf-phpmyadmin](https://github.com/nxhack/chef/tree/master/cookbooks/conf-phpmyadmin)
 <pre>
 recipe           "conf-phpmyadmin", "Installs/Configure phpMyAdmin"
