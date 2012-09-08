@@ -34,24 +34,24 @@ if node['cloud']['provider'] == 'ec2'
         `a2enmod rewrite`
         `/etc/init.d/apache2 stop`
         `/bin/bash /usr/share/doc/wordpress/examples/setup-mysql -n wordpress localhost`
-        `mv /etc/wordpress /etc/wordpress-jp`
-        `mv /usr/share/doc/wordpress /etc/wordpress-jp/doc`
+        `mv /etc/wordpress /etc/wordpress-chef`
+        `mv /usr/share/doc/wordpress /etc/wordpress-chef/doc`
         `apt-get -y remove wordpress`
         `aptitude keep-all`
         `aptitude -y purge wordpress`
         `chgrp www-data /#{distdir}/www`
         `rm /#{distdir}/www/localhost`
         `rm -rf /#{distdir}/www/wp-uploads`
-        `cat /etc/wordpress-jp/config-localhost.php | fgrep -v '/localhost' > /etc/wordpress-jp/config-jp.php`
-        `chmod 640 /etc/wordpress-jp/config-jp.php`
-        `chgrp www-data /etc/wordpress-jp/config-jp.php`
-        `mv /etc/wordpress-jp/wp-config.php /etc/wordpress-jp/wp-config.php.deb-orig`
+        `cat /etc/wordpress-chef/config-localhost.php | fgrep -v '/localhost' > /etc/wordpress-chef/config-chef.php`
+        `chmod 640 /etc/wordpress-chef/config-chef.php`
+        `chgrp www-data /etc/wordpress-chef/config-chef.php`
+        `mv /etc/wordpress-chef/wp-config.php /etc/wordpress-chef/wp-config.php.deb-orig`
       end
       action :create
-      not_if { ::File.exists?("/etc/wordpress-jp/wp-config.php")}
+      not_if { ::File.exists?("/etc/wordpress-chef/wp-config.php")}
     end
 
-    template "/etc/wordpress-jp/wp-config.php" do
+    template "/etc/wordpress-chef/wp-config.php" do
       source "wp-config.php.erb"
       owner "root"
       group "root"
@@ -61,7 +61,7 @@ if node['cloud']['provider'] == 'ec2'
       })
     end
 
-    template "/etc/wordpress-jp/apache2.conf" do
+    template "/etc/wordpress-chef/apache2.conf" do
       source "apache2.conf.erb"
       owner "root"
       group "root"
@@ -82,11 +82,11 @@ if node['cloud']['provider'] == 'ec2'
     end
 
     link "/#{distdir}/www/wordpress/wp-config.php" do
-      to "/etc/wordpress-jp/wp-config.php"
+      to "/etc/wordpress-chef/wp-config.php"
     end
 
     link "/etc/apache2/conf.d/wordpress.conf" do
-      to "/etc/wordpress-jp/apache2.conf"
+      to "/etc/wordpress-chef/apache2.conf"
       notifies :start, "service[apache2]", :immediately
     end
 
