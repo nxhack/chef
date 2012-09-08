@@ -1,6 +1,6 @@
 Description
 ===========
-Installs/Configures WordPress JP
+Installs/Configures WordPress Japanese version
 
 Requirements
 ============
