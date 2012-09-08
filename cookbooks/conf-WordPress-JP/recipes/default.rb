@@ -75,14 +75,13 @@ if node['cloud']['provider'] == 'ec2'
       block do
         `wget -qO - http://ja.wordpress.org/latest-ja.tar.gz > #{Chef::Config[:file_cache_path]}/wordpress-latest-ja.tar.gz`
         `tar xfz #{Chef::Config[:file_cache_path]}/wordpress-latest-ja.tar.gz -C /#{distdir}/www`
-        `mv /#{distdir}/www/wordpress /#{distdir}/www/blog`
-        `chown -R www-data:www-data /#{distdir}/www/blog`
+        `chown -R www-data:www-data /#{distdir}/www/wordpress`
       end
       action :create
       not_if { ::File.exists?("/etc/apache2/conf.d/wordpress.conf")}
     end
 
-    link "/#{distdir}/www/blog/wp-config.php" do
+    link "/#{distdir}/www/wordpress/wp-config.php" do
       to "/etc/wordpress-jp/wp-config.php"
     end
 

@@ -34,7 +34,7 @@ if node['cloud']['provider'] == 'ec2'
       command "/usr/bin/wp core install --url='http://#{node['ec2']['public_hostname']}/blog' --title='#{node['wp']['title']}' --admin_email='#{node['wp']['admin_email']}' --admin_password='#{node['wp']['admin_password']}'"
       user "www-data"
       group "www-data"
-      cwd "/#{distdir}/www/blog"
+      cwd "/#{distdir}/www/wordpress"
       ignore_failure true
       action :nothing
     end
@@ -59,7 +59,7 @@ if node['cloud']['provider'] == 'ec2'
         command "/usr/bin/wp plugin activate #{plugin}"
         user "www-data"
         group "www-data"
-        cwd "/#{distdir}/www/blog"
+        cwd "/#{distdir}/www/wordpress"
         ignore_failure true
         action :nothing
       end
@@ -67,11 +67,11 @@ if node['cloud']['provider'] == 'ec2'
         command "/usr/bin/wp plugin install #{plugin}"
         user "www-data"
         group "www-data"
-        cwd "/#{distdir}/www/blog"
+        cwd "/#{distdir}/www/wordpress"
         ignore_failure true
         action :run
         notifies :run, "execute[activate_#{plugin}]", :immediately
-        not_if { ::File.exists?("/#{distdir}/www/blog/wp-content/plugins/#{plugin}")}
+        not_if { ::File.exists?("/#{distdir}/www/wordpress/wp-content/plugins/#{plugin}")}
       end
     end
 
@@ -80,7 +80,7 @@ if node['cloud']['provider'] == 'ec2'
       command "/usr/bin/wp plugin activate akismet"
       user "www-data"
       group "www-data"
-      cwd "/#{distdir}/www/blog"
+      cwd "/#{distdir}/www/wordpress"
       ignore_failure true
       action :nothing
     end
@@ -90,22 +90,22 @@ if node['cloud']['provider'] == 'ec2'
       command "/usr/bin/wp plugin activate wp-multibyte-patch"
       user "www-data"
       group "www-data"
-      cwd "/#{distdir}/www/blog"
+      cwd "/#{distdir}/www/wordpress"
       ignore_failure true
       action :nothing
     end
 
     # for APC Object Cache
     execute "setup_apc" do
-      command "/bin/mv /#{distdir}/www/blog/wp-content/plugins/apc/object-cache.php /#{distdir}/www/blog/wp-content/"
+      command "/bin/mv /#{distdir}/www/wordpress/wp-content/plugins/apc/object-cache.php /#{distdir}/www/wordpress/wp-content/"
       user "www-data"
       group "www-data"
-      cwd "/#{distdir}/www/blog"
+      cwd "/#{distdir}/www/wordpress"
       ignore_failure true
       action :run
       notifies :run, "execute[activate_akismet]", :immediately
       notifies :run, "execute[activate_wp-multibyte-patch]", :immediately
-      not_if { ::File.exists?("/#{distdir}/www/blog/wp-content/object-cache.php")}
+      not_if { ::File.exists?("/#{distdir}/www/wordpress/wp-content/object-cache.php")}
     end
 
   end
