@@ -38,6 +38,7 @@ if node['cloud']['provider'] == 'ec2'
     # install again manually
     package "php5-dev"
     package "php-pear"
+    package "re2c"
 
     execute "pecl_install_memcache" do
       command "pecl install memcache"

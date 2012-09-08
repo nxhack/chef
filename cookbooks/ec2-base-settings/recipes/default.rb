@@ -72,6 +72,7 @@ if node['cloud']['provider'] == 'ec2'
     package "dump"
     package "s3cmd"
     package "git-core"
+    package "make"
 
   end
 end

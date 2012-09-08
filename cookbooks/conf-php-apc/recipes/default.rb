@@ -33,6 +33,7 @@ if node['cloud']['provider'] == 'ec2'
     package "php5-dev"
     package "php-pear"
     package "libpcre3-dev"
+    package "re2c"
 
     execute "pecl_install_apc" do
       command "pecl install apc"

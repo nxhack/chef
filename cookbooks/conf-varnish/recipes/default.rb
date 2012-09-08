@@ -36,7 +36,8 @@ if node['cloud']['provider'] == 'ec2'
       group "root"
       mode "0644"
       variables({
-         :codename => node['lsb']['codename']
+         :codename => 'lucid'
+         ####  :codename => node['lsb']['codename']
       })
       notifies :run, "execute[varnish-apt-key]", :immediately
       notifies :run, "execute[apt-update]", :immediately
