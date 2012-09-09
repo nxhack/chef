@@ -65,6 +65,16 @@ recipe           "conf-postfix", "Installs/Configure postfix"
 recipe           "conf-mysql", "Installs/Configure MySQL"
 </pre>
 
+* [conf-apache2](https://github.com/nxhack/chef/tree/master/cookbooks/conf-apache2)
+<pre>
+recipe           "conf-apache2", "Installs apache2-mpm-prefork"
+</pre>
+
+* [conf-php5](https://github.com/nxhack/chef/tree/master/cookbooks/conf-php5)
+<pre>
+recipe           "conf-php5", "Installs php5"
+</pre>
+
 * [conf-WordPress-JP](https://github.com/nxhack/chef/tree/master/cookbooks/conf-WordPress-JP)
 <pre>
 recipe           "conf-WordPress-JP", "Installs/Configure WordPress JP"
