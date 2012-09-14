@@ -85,6 +85,11 @@ recipe           "conf-WordPress", "Installs/Configure WordPress"
 recipe           "conf-WordPress-cli", "Installs/Configures WordPress CLI tools and Plugins"
 </pre>
 
+* [conf-MediaWiki](https://github.com/nxhack/chef/tree/master/cookbooks/conf-MediaWiki)
+<pre>
+recipe           "conf-MediaWiki", "Installs/Configure MediaWiki"
+</pre>
+
 * [conf-phpmyadmin](https://github.com/nxhack/chef/tree/master/cookbooks/conf-phpmyadmin)
 <pre>
 recipe           "conf-phpmyadmin", "Installs/Configure phpMyAdmin"
