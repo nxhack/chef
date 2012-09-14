@@ -75,9 +75,9 @@ recipe           "conf-apache2", "Installs apache2-mpm-prefork"
 recipe           "conf-php5", "Installs php5"
 </pre>
 
-* [conf-WordPress-JP](https://github.com/nxhack/chef/tree/master/cookbooks/conf-WordPress-JP)
+* [conf-WordPress](https://github.com/nxhack/chef/tree/master/cookbooks/conf-WordPress)
 <pre>
-recipe           "conf-WordPress-JP", "Installs/Configure WordPress JP"
+recipe           "conf-WordPress", "Installs/Configure WordPress"
 </pre>
 
 * [conf-WordPress-cli](https://github.com/nxhack/chef/tree/master/cookbooks/conf-WordPress-cli)

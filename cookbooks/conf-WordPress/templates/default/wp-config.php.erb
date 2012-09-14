@@ -1,0 +1,13 @@
+<?php
+require_once('/etc/wordpress-chef/config-chef.php');
+
+define('WP_CORE_UPDATE', true);
+define('DB_CHARSET', 'utf8');
+define('DB_COLLATE', '');
+
+define('ABSPATH', '/<%= @distdir %>/www/wordpress/');
+define('WP_DEBUG', false);
+define('WPLANG', 'ja');
+
+require_once(ABSPATH . 'wp-settings.php');
+?>

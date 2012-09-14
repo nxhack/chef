@@ -22,36 +22,43 @@ if node['cloud']['provider'] == 'ec2'
 
     package "ethtool"
 
-    if node['lsb']['codename'] == 'lucid'
+    execute "update-network_interfaces-1" do
+      command "echo 'post-up /sbin/ethtool -K eth0 sg off' >> /etc/network/interfaces"
+      action :nothing
+    end
 
-      execute "update-network_interfaces-1" do
-        command "echo 'post-up /usr/sbin/ethtool -K eth0 sg off' >> /etc/network/interfaces"
-        action :nothing
-      end
+    execute "update-network_interfaces-2" do
+      command "echo 'post-up /sbin/ethtool -K eth0 tso off' >> /etc/network/interfaces"
+      action :nothing
+    end
 
-      execute "update-network_interfaces-2" do
-        command "echo 'post-up /usr/sbin/ethtool -K eth0 tso off' >> /etc/network/interfaces"
-        action :nothing
-      end
+    # (insert rc.local sample)
+    #  execute "update-network_interfaces-1" do
+    #    command "sed --in-place 's|^[^#]*exit 0|/sbin/ethtool -K eth0 sg off\\n&|' /etc/rc.local"
+    #    action :nothing
+    #  end
+    #
+    #  execute "update-network_interfaces-2" do
+    #    command "sed --in-place 's|^[^#]*exit 0|/sbin/ethtool -K eth0 tso off\\n&|' /etc/rc.local"
+    #    action :nothing
+    #  end
 
-      execute "sg_off" do
-        command "/usr/sbin/ethtool -K eth0 sg off"
-        action :nothing
-      end
+    execute "sg_off" do
+      command "/sbin/ethtool -K eth0 sg off"
+      action :nothing
+    end
 
-      execute "tso_off" do
-        command "/usr/sbin/ethtool -K eth0 tso off"
-        action :nothing
-      end
+    execute "tso_off" do
+      command "/sbin/ethtool -K eth0 tso off"
+      action :nothing
+    end
 
-      file "#{Chef::Config[:file_cache_path]}/ec2-disable-TOE.done" do
-        action :create_if_missing
-        notifies :run, "execute[update-network_interfaces-1]", :immediately
-        notifies :run, "execute[update-network_interfaces-2]", :immediately
-        notifies :run, "execute[sg_off]", :immediately
-        notifies :run, "execute[tso_off]", :immediately
-      end
-
+    file "#{Chef::Config[:file_cache_path]}/ec2-disable-TOE.done" do
+      action :create_if_missing
+      notifies :run, "execute[update-network_interfaces-1]", :immediately
+      notifies :run, "execute[update-network_interfaces-2]", :immediately
+      notifies :run, "execute[sg_off]", :immediately
+      notifies :run, "execute[tso_off]", :immediately
     end
 
   end

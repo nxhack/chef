@@ -1,0 +1,22 @@
+<?php
+define('DB_NAME', '<%= @db_name %>');
+define('DB_USER', '<%= @db_user %>');
+define('DB_PASSWORD', '<%= @db_password %>');
+define('DB_HOST', '<%= @db_host %>');
+define('AUTH_KEY',         '<%= @auth_key %>');
+define('SECURE_AUTH_KEY',  '<%= @secre_auth_key %>');
+define('LOGGED_IN_KEY',    '<%= @logged_in_key %>');
+define('NONCE_KEY',        '<%= @nonce_key %>');
+define('AUTH_SALT',        '<%= @auth_salt %>');
+define('SECURE_AUTH_SALT', '<%= @secre_auth_salt %>');
+define('LOGGED_IN_SALT',   '<%= @logged_in_salt %>');
+define('NONCE_SALT',       '<%= @nonce_salt %>');
+
+$table_prefix  = '<%= @table_prefix %>';
+$server = DB_HOST;
+$loginsql = DB_USER;
+$passsql = DB_PASSWORD;
+$base = DB_NAME;
+# $upload_path = "/var/www/wp-uploads/localhost";
+# $upload_url_path = "http://localhost/wp-uploads";
+?>

@@ -1,0 +1,7 @@
+Alias /blog /<%= @distdir %>/www/wordpress
+
+<Directory /<%= @distdir %>/www/wordpress>
+	   Options +FollowSymLinks
+	   AllowOverride FileInfo
+	   DirectoryIndex index.php
+</Directory>

@@ -1,0 +1,26 @@
+# Uncomment this to add an alias.
+# This does not work properly with virtual hosts..
+Alias /wiki /<%= @distdir %>/www/mediawiki
+
+<Directory /<%= @distdir %>/www/mediawiki/>
+	Options +FollowSymLinks
+	AllowOverride All
+	order allow,deny
+	allow from all
+</Directory>
+
+# some directories must be protected
+<Directory /<%= @distdir %>/www/mediawiki/config>
+	Options -FollowSymLinks
+	AllowOverride None
+</Directory>
+<Directory /<%= @distdir %>/www/mediawiki/upload>
+	Options -FollowSymLinks
+	AllowOverride None
+</Directory>
+<Directory /<%= @distdir %>/www/mediawiki/images>
+	Options -FollowSymLinks
+	AllowOverride None
+	AddType text/plain .html .htm .shtml .php
+	php_admin_flag engine off
+</Directory>

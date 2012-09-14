@@ -1,0 +1,41 @@
+Usage: php install.php [--conf|--confpath|--dbname|--dbpass|--dbpassfile|--dbpath|--dbport|--dbprefix|--dbserver|--dbtype|--dbuser|--env-checks|--globals|--help|--installdbpass|--installdbuser|--lang|--memory-limit|--pass|--quiet|--scriptpath|--server|--wiki] <name> <admin>
+
+Generic maintenance parameters:
+    --help (-h): Display this help message
+    --quiet (-q): Whether to supress non-error output
+    --conf: Location of LocalSettings.php, if not default
+    --wiki: For specifying the wiki ID
+    --globals: Output globals at the end of processing for debugging
+    --memory-limit: Set a specific memory limit for the script, "max"
+        for no limit or "default" to avoid changing it
+    --server: The protocol and server name to use in URLs, e.g.
+        http://en.wikipedia.org. This is sometimes necessary because server name
+        detection may fail in command line scripts.
+
+Script dependant parameters:
+    --dbuser: The DB user to use for this script
+    --dbpass: The password to use for this script
+
+Script specific parameters:
+    --confpath: Path to write LocalSettings.php to, default
+        /srv/www/mediawiki
+    --dbname: The database name (my_wiki)
+    --dbpassfile: An alternative way to provide dbpass option, as the
+        contents of this file
+    --dbpath: The path for the SQLite DB (/var/data)
+    --dbport: The database port; only for PostgreSQL (5432)
+    --dbprefix: Optional database table name prefix
+    --dbserver: The database host (localhost)
+    --dbtype: The type of database (mysql)
+    --env-checks: Run environment checks only, don't change anything
+    --installdbpass: The pasword for the DB user to install as.
+    --installdbuser: The user to use for installing (root)
+    --lang: The language to use (en)
+    --pass: The password for the wiki administrator. You will be
+        prompted for this if it isn't provided
+    --scriptpath: The relative path of the wiki in the web server
+        (/wiki)
+
+Arguments:
+    <name>: The name of the wiki
+    <admin>: The username of the wiki administrator (WikiSysop)
