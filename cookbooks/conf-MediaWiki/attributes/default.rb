@@ -12,7 +12,7 @@ default['mw']['db_host'] = 'localhost'
 default['mw']['table_prefix'] = 'mw_'
 
 # for mw install.php
-default['mw']['url'] = 'http://www.example.com/blog'
+default['mw']['url'] = 'http://www.example.com/wiki'
 default['mw']['title'] = 'TEST site'
 default['mw']['admin_name'] = 'WikiSysop'
-default['mw']['admin_password'] = 'WPAdmin0Pass'
+default['mw']['admin_password'] = 'MWAdmin0Pass'
