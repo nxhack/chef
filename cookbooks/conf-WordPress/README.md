@@ -1,9 +1,10 @@
 Description
 ===========
-Installs/Configures WordPress Japanese version
+Installs/Configures WordPress
 
 Requirements
 ============
+secure_password need recipe['openssl']
 
 Attributes
 ==========
