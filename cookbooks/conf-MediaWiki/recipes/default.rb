@@ -52,7 +52,7 @@ if node['cloud']['provider'] == 'ec2'
     end
 
     # create database for MediaWiki
-    bash "create_database" do
+    bash "mw_create_database" do
       user "root"
       cwd "/tmp"
       flags "-e"
@@ -81,7 +81,7 @@ EOF
 
     # mkdir '/#{distdir}/www/mediawiki'
     directory "/#{distdir}/www/mediawiki" do
-      owner "root"
+      owner "www-data"
       group "www-data"
       mode "0750"
       action :create
@@ -115,10 +115,16 @@ EOF
       not_if { ::File.exists?("/etc/apache2/conf.d/mediawiki.conf")}
     end
 
+    execute "chmod_LocalSettings" do
+      command "chmod o-rwx /#{distdir}/www/mediawiki/LocalSettings.php"
+      action :nothing
+    end
+
     link "/etc/apache2/conf.d/mediawiki.conf" do
       to "/etc/mediawiki-chef/apache.conf"
-      notifies :run, "bash[create_database]", :immediately
+      notifies :run, "bash[mw_create_database]", :immediately
       notifies :run, "execute[mw_core_install]", :immediately
+      notifies :run, "execute[chmod_LocalSettings]", :immediately
       notifies :restart, "service[apache2]", :immediately
     end
 

@@ -54,7 +54,7 @@ if node['cloud']['provider'] == 'ec2'
     nonce_salt = secure_password + secure_password + secure_password + secure_password
 
     # create database for WordPress
-    bash "create_database" do
+    bash "wp_create_database" do
       user "root"
       cwd "/tmp"
       flags "-e"
@@ -83,7 +83,7 @@ EOF
 
     # mkdir '/#{distdir}/www/wordpress'
     directory "/#{distdir}/www/wordpress" do
-      owner "root"
+      owner "www-data"
       group "www-data"
       mode "0750"
       action :create
@@ -162,7 +162,7 @@ EOF
 
     link "/etc/apache2/conf.d/wordpress.conf" do
       to "/etc/wordpress-chef/apache2.conf"
-      notifies :run, "bash[create_database]", :immediately
+      notifies :run, "bash[wp_create_database]", :immediately
       notifies :create, "ruby_block[install_additional_modules]", :immediately
       notifies :restart, "service[apache2]", :immediately
     end

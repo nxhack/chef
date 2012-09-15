@@ -26,6 +26,7 @@ if node['cloud']['provider'] == 'ec2'
     package "php5-gd"
     package "php5-intl"
     package "php5-mysql"
+    package "php5-mcrypt"
     package "libphp-phpmailer"
     package "libphp-simplepie"
     package "libphp-snoopy"
