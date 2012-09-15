@@ -22,7 +22,7 @@ if node['cloud']['provider'] == 'ec2'
 
     package "php-apc"
 
-    cookbook_file "/etc/php5/apc.ini" do
+    cookbook_file "/etc/php5/conf.d/apc.ini" do
       source "apc.ini"
       owner "root"
       group "root"

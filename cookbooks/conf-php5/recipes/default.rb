@@ -31,5 +31,12 @@ if node['cloud']['provider'] == 'ec2'
     package "libphp-simplepie"
     package "libphp-snoopy"
 
+    cookbook_file "/etc/php5/apache2/php.ini" do
+      source "php.ini"
+      owner "root"
+      group "root"
+      mode "0644"
+    end
+
   end
 end
