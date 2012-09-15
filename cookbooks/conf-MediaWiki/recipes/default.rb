@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Cookbook Name:: conf-WordPress-JP
+# Cookbook Name:: conf-MediaWiki
 # Recipe:: default
 #
 # Copyright 2012, Hirokazu MORIKAWA
