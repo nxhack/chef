@@ -33,5 +33,21 @@ if node['cloud']['provider'] == 'ec2'
       mode "0600"
     end
 
+    execute "sshd_config_add_1" do
+      command "echo 'UseDNS no' >> /etc/ssh/sshd_config"
+      action :nothing
+    end
+
+    execute "sshd_config_add_2" do
+      command "echo 'AddressFamily inet' >> /etc/ssh/sshd_config"
+      action :nothing
+    end
+
+    file "#{Chef::Config[:file_cache_path]}/conf-ssh-config.done" do
+      action :create_if_missing
+      notifies :run, "execute[sshd_config_add_1]", :immediately
+      notifies :run, "execute[sshd_config_add_2]", :immediately
+    end
+
   end
 end

@@ -42,7 +42,7 @@ MEMLOCK=82000
 #
 DAEMON_OPTS="-a :<%= @varnish_port %> \
              -T localhost:6082 \
-	     -f /etc/varnish/<%= @varnish_config %> \
+             -f /etc/varnish/<%= @varnish_config %> \
              -S /etc/varnish/secret \
 	     -p thread_pools=1 \
 	     -p thread_pool_add_delay=10 \

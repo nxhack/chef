@@ -1,0 +1,20 @@
+ServerLimit 16
+StartServers 16
+MinSpareServers 16
+MaxSpareServers 16
+MaxClients 16
+#ServerLimit         384
+#StartServers         10
+#StartServers         80
+#MinSpareServers      80
+#MaxSpareServers     80
+#MaxClients          384
+#MaxRequestsPerChild 3000
+#KeepAlive Off
+#KeepAliveTimeout 1
+MaxKeepAliveRequests 50
+KeepAliveTimeout 3
+# remove Etags
+FileETag none
+# 
+#SendBufferSize	65536

@@ -22,5 +22,41 @@ if node['cloud']['provider'] == 'ec2'
 
     package "apache2-mpm-prefork"
 
+    cookbook_file "/etc/apache2/conf.d/security" do
+      source "security"
+      owner "root"
+      group "root"
+      mode "0644"
+    end
+
+    cookbook_file "/etc/apache2/conf.d/tunings" do
+      source "tunings"
+      owner "root"
+      group "root"
+      mode "0644"
+    end
+
+    cookbook_file "/etc/apache2/mods-available/deflate.conf" do
+      source "deflate.conf"
+      owner "root"
+      group "root"
+      mode "0644"
+    end
+
+    cookbook_file "/etc/apache2/mods-available/expires.conf" do
+      source "expires.conf"
+      owner "root"
+      group "root"
+      mode "0644"
+    end
+
+    #link "/etc/apache2/mods-enabled/deflate.conf" do
+    #  to "/etc/apache2/mods-available/deflate.conf"
+    #end
+
+    #link "/etc/apache2/mods-enabled/expires.conf" do
+    #  to "/etc/apache2/mods-available/expires.conf"
+    #end
+
   end
 end

@@ -152,6 +152,7 @@ EOF
     ruby_block "install_additional_modules" do
       block do
         `a2enmod rewrite`
+        `a2enmod expires`
       end
       action :nothing
     end
