@@ -168,5 +168,17 @@ EOF
       notifies :restart, "service[apache2]", :immediately
     end
 
+    # my config
+    cookbook_file "/etc/wordpress-chef/apache2-auth.conf" do
+      source "apache2-auth.conf"
+      owner "root"
+      group "root"
+      mode "0644"
+    end
+
+    link "/etc/apache2/conf.d/wordpress-auth.conf" do
+      to "/etc/wordpress-chef/apache2-auth.conf"
+    end
+    
   end
 end

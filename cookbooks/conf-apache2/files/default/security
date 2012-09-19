@@ -21,6 +21,11 @@
 	Deny from all
 </DirectoryMatch>
 
+<DirectoryMatch "/\.svn/|/\.git/|/\.hg/|/\.bzr/|/\.cvs/">
+	Order allow,deny
+	Deny from all
+</DirectoryMatch>
+
 <FilesMatch "~$|#$|,v$|,t$">
 	Order allow,deny
 	Deny from all

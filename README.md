@@ -125,6 +125,11 @@ recipe           "conf-screen", "Configure screen : Setup for ubuntu account."
 recipe           "conf-sysctl", "Configure sysctl"
 </pre>
 
+* [conf-rc-local](https://github.com/nxhack/chef/tree/master/cookbooks/conf-rc-local)
+<pre>
+recipe           "conf-sysctl", "Configure rc.local"
+</pre>
+
 * [conf-limits](https://github.com/nxhack/chef/tree/master/cookbooks/conf-limits)
 <pre>
 recipe           "conf-limits", "Install my limits"
