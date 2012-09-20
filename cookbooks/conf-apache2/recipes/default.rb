@@ -21,6 +21,8 @@ if node['cloud']['provider'] == 'ec2'
   if node['platform'] == 'ubuntu'
 
     package "apache2-mpm-prefork"
+    # install metapackage
+    package "apache2"
 
     cookbook_file "/etc/apache2/conf.d/security" do
       source "security"
