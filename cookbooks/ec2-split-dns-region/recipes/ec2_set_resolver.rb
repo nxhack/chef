@@ -21,8 +21,10 @@ if node['cloud']['provider'] == 'ec2'
   if ['debian','ubuntu'].member? node['platform']
 
     dhclientconf = '/etc/dhcp3/dhclient.conf'
+    resolvconf = '/etc/resolv.conf'
     if node['lsb']['codename'] == 'precise'
       dhclientconf = '/etc/dhcp/dhclient.conf'
+      resolvconf = '/etc/resolvconf/resolv.conf.d/base'
     end
 
     template dhclientconf do
@@ -39,11 +41,6 @@ if node['cloud']['provider'] == 'ec2'
       command "/sbin/resolvconf -u"
       action :nothing
       only_if { node['lsb']['codename'] == 'precise' }
-    end
-
-    resolvconf = '/etc/resolv.conf'
-    if node['lsb']['codename'] == 'precise'
-      resolvconf = '/etc/resolvconf/resolv.conf.d/base'
     end
 
     template resolvconf do
