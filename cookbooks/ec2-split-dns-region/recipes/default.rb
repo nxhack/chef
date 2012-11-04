@@ -53,7 +53,7 @@ if node['cloud']['provider'] == 'ec2'
 
       my_servers.each do |server|
         if server['fqdn'] != node['fqdn'] 
-          server['ec2_arpa'] = IPAddr.new(server['ipaddress']).reverse
+          server.set['ec2_arpa'] = IPAddr.new(server['ipaddress']).reverse
 
           template "/etc/bind/db.#{server['fqdn']}.arpa" do
             source "db.otherarpa.erb"
