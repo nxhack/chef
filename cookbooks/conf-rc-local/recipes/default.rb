@@ -35,11 +35,11 @@ if node['cloud']['provider'] == 'ec2'
       action :nothing
     end
     execute "modify_rc_local_03" do
-      command "sed --in-place 's|^[^#]*exit 0|echo 512 > /sys/block/#{rc_root_device}/queue/nr_requests\\n&|' /etc/rc.local"
+      command "sed --in-place 's|^[^#]*exit 0|/sbin/blockdev --setra 1024 /dev/#{rc_root_device}\\n&|' /etc/rc.local"
       action :nothing
     end
     execute "modify_rc_local_04" do
-      command "sed --in-place 's|^[^#]*exit 0|echo \'noop\' > /sys/block/#{rc_root_device}/queue/scheduler\\n&|' /etc/rc.local"
+      command "sed --in-place 's|^[^#]*exit 0|echo \'deadline\' > /sys/block/#{rc_root_device}/queue/scheduler\\n&|' /etc/rc.local"
       action :nothing
     end
 

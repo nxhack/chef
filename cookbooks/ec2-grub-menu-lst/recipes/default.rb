@@ -21,8 +21,10 @@ if node['cloud']['provider'] == 'ec2'
   if node['platform'] == 'ubuntu'
 
     if node['os_version'] =~ /^3\./
+      kernel_options = node['kernel_options_3']
       root_device = node['root_device_3']
     else
+      kernel_options = node['kernel_options_2']
       root_device = node['root_device_2']
     end
 
@@ -32,7 +34,7 @@ if node['cloud']['provider'] == 'ec2'
     end
 
     execute "update-grub-menu-list-2" do
-      command "sed --in-place 's|console=hvc0|console=hvc0 #{node['kernel_options']}|g' /boot/grub/menu.lst"
+      command "sed --in-place 's|console=hvc0|console=hvc0 #{kernel_options}|g' /boot/grub/menu.lst"
       action :nothing
     end
 
