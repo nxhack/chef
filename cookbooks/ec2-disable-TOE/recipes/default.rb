@@ -32,6 +32,16 @@ if node['cloud']['provider'] == 'ec2'
       action :nothing
     end
 
+    execute "update-network_interfaces-3" do
+      command "echo 'post-up /sbin/ethtool -K eth0 gso off' >> /etc/network/interfaces"
+      action :nothing
+    end
+
+    execute "update-network_interfaces-4" do
+      command "echo 'post-up /sbin/ethtool -K eth0 gro off' >> /etc/network/interfaces"
+      action :nothing
+    end
+
     # (insert rc.local sample)
     #  execute "update-network_interfaces-1" do
     #    command "sed --in-place 's|^[^#]*exit 0|/sbin/ethtool -K eth0 sg off\\n&|' /etc/rc.local"
@@ -53,12 +63,26 @@ if node['cloud']['provider'] == 'ec2'
       action :nothing
     end
 
+    execute "gso_off" do
+      command "/sbin/ethtool -K eth0 gso off"
+      action :nothing
+    end
+
+    execute "gro_off" do
+      command "/sbin/ethtool -K eth0 gro off"
+      action :nothing
+    end
+
     file "#{Chef::Config[:file_cache_path]}/ec2-disable-TOE.done" do
       action :create_if_missing
       notifies :run, "execute[update-network_interfaces-1]", :immediately
       notifies :run, "execute[update-network_interfaces-2]", :immediately
+      notifies :run, "execute[update-network_interfaces-3]", :immediately
+      notifies :run, "execute[update-network_interfaces-4]", :immediately
       notifies :run, "execute[sg_off]", :immediately
       notifies :run, "execute[tso_off]", :immediately
+      notifies :run, "execute[gso_off]", :immediately
+      notifies :run, "execute[gro_off]", :immediately
     end
 
   end

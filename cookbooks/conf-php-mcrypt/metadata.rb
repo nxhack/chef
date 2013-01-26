@@ -1,3 +1,4 @@
+name             "conf-php-mcrypt"
 maintainer       "Hirokazu MORIKAWA"
 maintainer_email "morikawa@nxhack.com"
 license          "Apache 2.0"

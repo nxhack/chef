@@ -35,23 +35,25 @@ if node['cloud']['provider'] == 'ec2'
       notifies :restart, "service[memcached]", :immediately
     end
 
-    # install again manually
-    package "php5-dev"
-    package "php-pear"
-    package "re2c"
+    if node['lsb']['codename'] == 'lucid'
+      # install php5-memcache manually, because package is too old.
+      package "php5-dev"
+      package "php-pear"
+      package "re2c"
 
-    execute "pecl_install_memcache" do
-      command "pecl install memcache"
-      action :nothing
-      ignore_failure true
-    end
+      execute "pecl_install_memcache" do
+        command "pecl install memcache"
+        action :nothing
+        ignore_failure true
+      end
 
-    service "apache2"
+      service "apache2"
 
-    file "#{Chef::Config[:file_cache_path]}/conf-memcache.done" do
-      action :create_if_missing
-      notifies :run, "execute[pecl_install_memcache]", :immediately
-      notifies :restart, "service[apache2]", :immediately
+      file "#{Chef::Config[:file_cache_path]}/conf-memcache.done" do
+        action :create_if_missing
+        notifies :run, "execute[pecl_install_memcache]", :immediately
+        notifies :restart, "service[apache2]", :immediately
+      end
     end
 
   end

@@ -82,6 +82,7 @@ if node['cloud']['provider'] == 'ec2'
         owner "root"
         group "root"
         mode "0644"
+        not_if { node['lsb']['codename'] == 'precise' }
       end
 
       cookbook_file "/etc/bind/named.conf.options" do

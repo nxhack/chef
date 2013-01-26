@@ -1,3 +1,4 @@
+name             "conf-WordPress-cli"
 maintainer       "Hirokazu MORIKAWA"
 maintainer_email "morikawa@nxhack.com"
 license          "Apache 2.0"

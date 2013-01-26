@@ -21,6 +21,10 @@
 if node['cloud']['provider'] == 'ec2'
   if node['platform'] == 'ubuntu'
 
+    if node['lsb']['codename'] == 'precise'
+      package "linux-image-extra-virtual"
+    end
+
     package "lm-sensors"
 
     service "module-init-tools" do

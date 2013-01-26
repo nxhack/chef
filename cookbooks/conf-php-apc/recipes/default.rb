@@ -29,24 +29,26 @@ if node['cloud']['provider'] == 'ec2'
       mode "0644"
     end
 
-    # install again manually
-    package "php5-dev"
-    package "php-pear"
-    package "libpcre3-dev"
-    package "re2c"
+    if node['lsb']['codename'] == 'lucid'
+      # install php-apc manually, because package is too old.
+      package "php5-dev"
+      package "php-pear"
+      package "libpcre3-dev"
+      package "re2c"
 
-    execute "pecl_install_apc" do
-      command "pecl install apc"
-      action :nothing
-      ignore_failure true
-    end
+      execute "pecl_install_apc" do
+        command "pecl install apc"
+        action :nothing
+        ignore_failure true
+      end
 
-    service "apache2"
+      service "apache2"
 
-    file "#{Chef::Config[:file_cache_path]}/conf-php-apc.done" do
-      action :create_if_missing
-      notifies :run, "execute[pecl_install_apc]", :immediately
-      notifies :restart, "service[apache2]", :immediately
+      file "#{Chef::Config[:file_cache_path]}/conf-php-apc.done" do
+        action :create_if_missing
+        notifies :run, "execute[pecl_install_apc]", :immediately
+        notifies :restart, "service[apache2]", :immediately
+      end
     end
 
   end

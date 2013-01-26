@@ -1,3 +1,4 @@
+name             "ec2-hostname"
 maintainer       "Hirokazu MORIKAWA"
 maintainer_email "morikawa@nxhack.com"
 license          "MIT"

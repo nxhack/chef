@@ -1,3 +1,4 @@
+name             "ec2-grub-menu-lst"
 maintainer       "Hirokazu MORIKAWA"
 maintainer_email "morikawa@nxhack.com"
 license          "Apache 2.0"
