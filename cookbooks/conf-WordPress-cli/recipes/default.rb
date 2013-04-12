@@ -31,7 +31,7 @@ if node['cloud']['provider'] == 'ec2'
 
     # URL attribute is set node['wp']['url'], but at EC2 bootstrapping USE ec2.public_hostname or node['fqdn']:FIXME 
     execute "wp_core_install" do
-      command "/usr/bin/wp core install --url='http://#{node['ec2']['public_hostname']}/blog' --title='#{node['wp']['title']}' --admin_email='#{node['wp']['admin_email']}' --admin_password='#{node['wp']['admin_password']}'"
+      command "/usr/bin/wp core install --url='http://#{node['ec2']['public_hostname']}/blog' --title='#{node['wp']['title']}' --admin_email='#{node['wp']['admin_email']}' --admin_password='#{node['wp']['admin_password']}' --path='/#{distdir}/www/wordpress'"
       user "www-data"
       group "www-data"
       cwd "/#{distdir}/www/wordpress"
