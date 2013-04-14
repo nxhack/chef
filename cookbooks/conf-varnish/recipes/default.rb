@@ -87,12 +87,12 @@ if node['cloud']['provider'] == 'ec2'
     # for logging
     package "libapache2-mod-rpaf"
 
-    cookbook_file "/etc/apache2/mods-available/rpaf.conf" do
-      source "rpaf.conf"
-      owner "root"
-      group "root"
-      mode "0644"
-    end
+    #cookbook_file "/etc/apache2/mods-available/rpaf.conf" do
+    #  source "rpaf.conf"
+    #  owner "root"
+    #  group "root"
+    #  mode "0644"
+    #end
 
     #link "/etc/apache2/mods-enabled/rpaf.conf" do
     #  to "/etc/apache2/mods-available/rpaf.conf"

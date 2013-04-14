@@ -37,7 +37,7 @@ if node['cloud']['provider'] == 'ec2'
       })
     end
 
-    execute "update_resolvconf" do
+    execute "update_resolvconf_2" do
       command "/sbin/resolvconf -u"
       action :nothing
       only_if { node['lsb']['codename'] == 'precise' }
@@ -51,7 +51,7 @@ if node['cloud']['provider'] == 'ec2'
       variables({
         :domain => node['domain']
       })
-      notifies :run, "execute[update_resolvconf]", :immediately
+      notifies :run, "execute[update_resolvconf_2]", :immediately
     end
 
   end

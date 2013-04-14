@@ -117,6 +117,7 @@ EOF
          :nonce_salt => nonce_salt,
          :table_prefix => table_prefix
       })
+      not_if { ::File.exists?("/etc/apache2/conf.d/wordpress.conf")}
     end
 
     template "/etc/wordpress-chef/wp-config.php" do
